@@ -99,6 +99,10 @@
 			<artifactId>h2</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
 			<version>${jjwt-api.version}</version>
