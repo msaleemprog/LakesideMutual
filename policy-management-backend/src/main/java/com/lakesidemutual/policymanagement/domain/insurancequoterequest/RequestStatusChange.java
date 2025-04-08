@@ -3,7 +3,6 @@ package com.lakesidemutual.policymanagement.domain.insurancequoterequest;
 import java.util.Date;
 import java.util.Objects;
 
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -19,7 +18,6 @@ import org.microserviceapipatterns.domaindrivendesign.ValueObject;
  */
 @Entity
 @Table(name = "requeststatuschanges")
-@Embeddable
 public class RequestStatusChange implements ValueObject {
 	@GeneratedValue
 	@Id
