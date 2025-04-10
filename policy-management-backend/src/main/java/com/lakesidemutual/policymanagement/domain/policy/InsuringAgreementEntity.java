@@ -7,9 +7,11 @@ import java.util.Objects;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.TableGenerator;
 
 /**
  * InsuringAgreementEntity is an entity which represents the insuring agreement between a
@@ -18,7 +20,15 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "insuringagreements")
 public class InsuringAgreementEntity implements org.microserviceapipatterns.domaindrivendesign.Entity {
-	@GeneratedValue
+
+	@TableGenerator(
+		name = "insuringagreements_gen",
+		table = "insuringagreements_seq",
+		pkColumnName = "sequence_name",
+		valueColumnName = "next_val",
+		pkColumnValue = "insuringagreements"
+	)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "insuringagreements_gen")
 	@Id
 	private Long id;
 
