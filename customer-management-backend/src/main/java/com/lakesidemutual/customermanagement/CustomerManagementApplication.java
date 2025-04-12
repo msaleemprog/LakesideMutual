@@ -4,8 +4,10 @@ import org.microserviceapipatterns.domaindrivendesign.BoundedContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.core.SpringVersion;
 
 /**
  * CustomerManagementApplication is the execution entry point of the Customer Management backend which
@@ -18,6 +20,7 @@ public class CustomerManagementApplication implements BoundedContext {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CustomerManagementApplication.class, args);
+		logger.info("Running with Spring Boot v{}, Spring v{}", SpringBootVersion.getVersion(), SpringVersion.getVersion());
 		logger.info("--- Customer Management backend started ---");
 	}
 }

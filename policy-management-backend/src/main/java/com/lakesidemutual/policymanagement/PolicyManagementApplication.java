@@ -4,7 +4,9 @@ import org.microserviceapipatterns.domaindrivendesign.BoundedContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.SpringVersion;
 import org.springframework.jms.annotation.EnableJms;
 
 /**
@@ -18,6 +20,7 @@ public class PolicyManagementApplication implements BoundedContext {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PolicyManagementApplication.class, args);
+		logger.info("Running with Spring Boot v{}, Spring v{}", SpringBootVersion.getVersion(), SpringVersion.getVersion());
 		logger.info("--- Policy Management backend started ---");
 	}
 }
