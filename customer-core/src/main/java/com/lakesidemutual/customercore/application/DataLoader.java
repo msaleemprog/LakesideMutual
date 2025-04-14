@@ -70,7 +70,7 @@ public class DataLoader implements ApplicationRunner {
 	 * This dummy data was generated using https://mockaroo.com/
 	 */
 	private List<Map<String, String>> loadCustomers() {
-		try(InputStream file = new ClassPathResource("mock_customers_small.csv").getInputStream()) {
+		try(InputStream file = new ClassPathResource("mock_customers_large.csv").getInputStream()) {
 			CsvMapper mapper = new CsvMapper();
 			CsvSchema schema = CsvSchema.emptySchema().withHeader();
 			MappingIterator<Map<String, String>> readValues = mapper.readerFor(Map.class).with(schema).readValues(file);
