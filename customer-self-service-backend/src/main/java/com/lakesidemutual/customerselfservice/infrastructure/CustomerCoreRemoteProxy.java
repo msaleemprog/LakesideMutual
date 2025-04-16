@@ -3,7 +3,6 @@ package com.lakesidemutual.customerselfservice.infrastructure;
 import com.lakesidemutual.customerselfservice.domain.customer.CustomerId;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.city.CitiesResponseDto;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.customer.*;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.microserviceapipatterns.domaindrivendesign.InfrastructureService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +35,6 @@ public class CustomerCoreRemoteProxy implements InfrastructureService, CustomerC
     int unsuccessfulAttemptsCounter = 0;
     int fallBackMethodExecutionsCounter = 0;
 
-    // TODO test/demo that protected methods actually stops executing for defined time period,
-    // otherwise the circuit breaker does not do much more than a regular exception handler
-    @CircuitBreaker(name = "CustomerCoreRemoteProxy", fallbackMethod = "getDummyCustomer")
     public CustomerDto getCustomer(CustomerId customerId) {
         try {
             final String url = customerCoreBaseURL + "/customers/" + customerId.getId();
