@@ -1,0 +1,24 @@
+ContextMap LakesideMutual {
+  contains CustomerCore, CustomerManagementBackend, CustomerSelfServiceBackend, PolicyManagementBackend, RiskManagementServer, SpringBootAdmin
+
+  // CustomerCore is upstream for the backends that use customer data:
+  CustomerCore -> CustomerManagementBackend
+  CustomerCore -> CustomerSelfServiceBackend
+  CustomerCore -> PolicyManagementBackend
+
+  // Risk server provides risk assessment used by policy:
+  RiskManagementServer -> PolicyManagementBackend
+
+  // Spring Boot Admin calls/monitors the services:
+  SpringBootAdmin -> CustomerCore
+  SpringBootAdmin -> CustomerManagementBackend
+  SpringBootAdmin -> CustomerSelfServiceBackend
+  SpringBootAdmin -> PolicyManagementBackend
+}
+
+BoundedContext CustomerCore
+BoundedContext CustomerManagementBackend
+BoundedContext CustomerSelfServiceBackend
+BoundedContext PolicyManagementBackend
+BoundedContext RiskManagementServer
+BoundedContext SpringBootAdmin

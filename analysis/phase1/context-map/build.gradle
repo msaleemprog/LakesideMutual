@@ -1,0 +1,12 @@
+plugins {
+  id 'java'
+  id 'org.contextmapper.gradle-plugin' version '6.12.0'
+}
+
+contextMapper {
+  // input CML
+  inputFile = file('lakeside-initial.cml')
+
+  // where generated files go
+  outputDir = file('.')
+}

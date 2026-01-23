@@ -1,0 +1,46 @@
+@startuml
+
+skinparam componentStyle uml2
+
+component [CustomerCore]
+component [CustomerManagementBackend]
+component [CustomerSelfServiceBackend]
+component [PolicyManagementBackend]
+component [RiskManagementServer]
+component [SpringBootAdmin]
+
+interface "Upstream-Downstream" as CustomerManagementBackend_to_CustomerCore
+[CustomerCore] --> CustomerManagementBackend_to_CustomerCore
+CustomerManagementBackend_to_CustomerCore <.. [CustomerManagementBackend] : consume
+
+interface "Upstream-Downstream" as CustomerSelfServiceBackend_to_CustomerCore
+[CustomerCore] --> CustomerSelfServiceBackend_to_CustomerCore
+CustomerSelfServiceBackend_to_CustomerCore <.. [CustomerSelfServiceBackend] : consume
+
+interface "Upstream-Downstream" as PolicyManagementBackend_to_CustomerCore
+[CustomerCore] --> PolicyManagementBackend_to_CustomerCore
+PolicyManagementBackend_to_CustomerCore <.. [PolicyManagementBackend] : consume
+
+interface "Upstream-Downstream" as PolicyManagementBackend_to_RiskManagementServer
+[RiskManagementServer] --> PolicyManagementBackend_to_RiskManagementServer
+PolicyManagementBackend_to_RiskManagementServer <.. [PolicyManagementBackend] : consume
+
+interface "Upstream-Downstream" as CustomerCore_to_SpringBootAdmin
+[SpringBootAdmin] --> CustomerCore_to_SpringBootAdmin
+CustomerCore_to_SpringBootAdmin <.. [CustomerCore] : consume
+
+interface "Upstream-Downstream" as CustomerManagementBackend_to_SpringBootAdmin
+[SpringBootAdmin] --> CustomerManagementBackend_to_SpringBootAdmin
+CustomerManagementBackend_to_SpringBootAdmin <.. [CustomerManagementBackend] : consume
+
+interface "Upstream-Downstream" as CustomerSelfServiceBackend_to_SpringBootAdmin
+[SpringBootAdmin] --> CustomerSelfServiceBackend_to_SpringBootAdmin
+CustomerSelfServiceBackend_to_SpringBootAdmin <.. [CustomerSelfServiceBackend] : consume
+
+interface "Upstream-Downstream" as PolicyManagementBackend_to_SpringBootAdmin
+[SpringBootAdmin] --> PolicyManagementBackend_to_SpringBootAdmin
+PolicyManagementBackend_to_SpringBootAdmin <.. [PolicyManagementBackend] : consume
+
+
+
+@enduml

@@ -1,0 +1,41 @@
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>analysis</groupId>
+  <artifactId>contextmapper-discovery-runner</artifactId>
+  <version>1.0.0</version>
+
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+  </properties>
+
+  <dependencies>
+    <!-- Context Mapper Discovery (reverse engineering) -->
+    <dependency>
+      <groupId>org.contextmapper</groupId>
+      <artifactId>context-mapper-discovery</artifactId>
+      <version>6.12.0</version>
+    </dependency>
+<dependency>
+  <groupId>org.contextmapper</groupId>
+  <artifactId>context-map-discovery</artifactId>
+  <version>1.4.0</version>
+</dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <mainClass>analysis.DiscoverLakeside</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

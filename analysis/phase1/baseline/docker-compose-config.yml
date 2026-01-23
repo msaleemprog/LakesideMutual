@@ -1,0 +1,183 @@
+﻿name: lakesidemutual
+services:
+  customer-core:
+    build:
+      context: C:\LakeSideMutual\LakesideMutual\customer-core
+      dockerfile: Dockerfile
+    environment:
+      SPRING_BOOT_ADMIN_CLIENT_URL: http://spring-boot-admin:9000
+    image: lakesidemutual/customer-core
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8110
+        published: "8110"
+        protocol: tcp
+  customer-management-backend:
+    build:
+      context: C:\LakeSideMutual\LakesideMutual\customer-management-backend
+      dockerfile: Dockerfile
+    depends_on:
+      customer-core:
+        condition: service_started
+        required: true
+    environment:
+      CUSTOMERCORE_BASEURL: http://customer-core:8110
+      SPRING_BOOT_ADMIN_CLIENT_URL: http://spring-boot-admin:9000
+    image: lakesidemutual/customer-management-backend
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8100
+        published: "8100"
+        protocol: tcp
+  customer-management-frontend:
+    build:
+      context: C:\LakeSideMutual\LakesideMutual\customer-management-frontend
+      dockerfile: Dockerfile
+    depends_on:
+      customer-management-backend:
+        condition: service_started
+        required: true
+    environment:
+      REACT_APP_CUSTOMER_MANAGEMENT_BACKEND: http://localhost:8100
+      REACT_APP_CUSTOMER_SELF_SERVICE_BACKEND: http://localhost:8080
+      REACT_APP_POLICY_MANAGEMENT_FRONTEND: http://localhost:3010
+    image: lakesidemutual/customer-management-frontend
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "3020"
+        protocol: tcp
+  customer-self-service-backend:
+    build:
+      context: C:\LakeSideMutual\LakesideMutual\customer-self-service-backend
+      dockerfile: Dockerfile
+    depends_on:
+      customer-core:
+        condition: service_started
+        required: true
+      policy-management-backend:
+        condition: service_started
+        required: true
+    environment:
+      CUSTOMERCORE_BASEURL: http://customer-core:8110
+      POLICYMANAGEMENT_TCPBROKERBINDADDRESS: tcp://policy-management-backend:61616
+      SPRING_BOOT_ADMIN_CLIENT_URL: http://spring-boot-admin:9000
+    image: lakesidemutual/customer-self-service-backend
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "8080"
+        protocol: tcp
+  customer-self-service-frontend:
+    build:
+      context: C:\LakeSideMutual\LakesideMutual\customer-self-service-frontend
+      dockerfile: Dockerfile
+    depends_on:
+      customer-management-backend:
+        condition: service_started
+        required: true
+      customer-self-service-backend:
+        condition: service_started
+        required: true
+      policy-management-backend:
+        condition: service_started
+        required: true
+    environment:
+      REACT_APP_CUSTOMER_MANAGEMENT_BACKEND: http://localhost:8100
+      REACT_APP_CUSTOMER_SELF_SERVICE_BACKEND: http://localhost:8080
+      REACT_APP_POLICY_MANAGEMENT_BACKEND: http://localhost:8090
+    image: lakesidemutual/customer-self-service-frontend
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "3000"
+        protocol: tcp
+  policy-management-backend:
+    build:
+      context: C:\LakeSideMutual\LakesideMutual\policy-management-backend
+      dockerfile: Dockerfile
+    depends_on:
+      customer-core:
+        condition: service_started
+        required: true
+    environment:
+      CUSTOMERCORE_BASEURL: http://customer-core:8110
+      SPRING_BOOT_ADMIN_CLIENT_URL: http://spring-boot-admin:9000
+    image: lakesidemutual/policy-management-backend
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8090
+        published: "8090"
+        protocol: tcp
+      - mode: ingress
+        target: 61613
+        published: "61613"
+        protocol: tcp
+      - mode: ingress
+        target: 61616
+        published: "61616"
+        protocol: tcp
+  policy-management-frontend:
+    build:
+      context: C:\LakeSideMutual\LakesideMutual\policy-management-frontend
+      dockerfile: Dockerfile
+    depends_on:
+      policy-management-backend:
+        condition: service_started
+        required: true
+    environment:
+      VUE_APP_POLICY_MANAGEMENT_BACKEND: http://localhost:8090
+    image: lakesidemutual/policy-management-frontend
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "3010"
+        protocol: tcp
+  risk-management-server:
+    build:
+      context: C:\LakeSideMutual\LakesideMutual\risk-management-server
+      dockerfile: Dockerfile
+    depends_on:
+      policy-management-backend:
+        condition: service_started
+        required: true
+    environment:
+      ACTIVEMQ_HOST: policy-management-backend
+      ACTIVEMQ_PORT: "61613"
+    image: lakesidemutual/risk-management-server
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 50051
+        published: "50051"
+        protocol: tcp
+  spring-boot-admin:
+    build:
+      context: C:\LakeSideMutual\LakesideMutual\spring-boot-admin
+      dockerfile: Dockerfile
+    image: lakesidemutual/spring-boot-admin
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 9000
+        published: "9000"
+        protocol: tcp
+networks:
+  default:
+    name: lakesidemutual_default

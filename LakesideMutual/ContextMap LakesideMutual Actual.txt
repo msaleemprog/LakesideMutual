@@ -1,0 +1,22 @@
+ContextMap LakesideMutual {
+  contains CustomerCore, CustomerManagementBackend, CustomerSelfServiceBackend, PolicyManagementBackend, RiskManagementServer, SpringBootAdmin
+}
+
+BoundedContext CustomerCore
+BoundedContext CustomerManagementBackend
+BoundedContext CustomerSelfServiceBackend
+BoundedContext PolicyManagementBackend
+BoundedContext RiskManagementServer
+BoundedContext SpringBootAdmin
+
+ContextMapRelationships {
+  CustomerManagementBackend -> CustomerCore
+  CustomerSelfServiceBackend -> CustomerCore
+  PolicyManagementBackend -> CustomerCore
+
+  PolicyManagementBackend -> RiskManagementServer
+  SpringBootAdmin -> CustomerCore
+  SpringBootAdmin -> CustomerManagementBackend
+  SpringBootAdmin -> CustomerSelfServiceBackend
+  SpringBootAdmin -> PolicyManagementBackend
+}
