@@ -29,7 +29,7 @@ services:
       - "9000:9000"
     environment:
       - OTEL_SERVICE_NAME=spring-boot-admin
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4317
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
       - OTEL_TRACES_EXPORTER=otlp
       - JAVA_TOOL_OPTIONS=-javaagent:/otel/opentelemetry-javaagent.jar
@@ -43,9 +43,10 @@ services:
     environment:
       - "SPRING_BOOT_ADMIN_CLIENT_URL=http://spring-boot-admin:9000"
       - OTEL_SERVICE_NAME=customer-core
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4317
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
       - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_INSTRUMENTATION_COMMON_PEER_SERVICE_MAPPING=customer-core:8110=customer-core,policy-management-backend:8090=policy-management-backend,customer-management-backend:8100=customer-management-backend,customer-self-service-backend:8080=customer-self-service-backend,spring-boot-admin:9000=spring-boot-admin,risk-management-server:50051=risk-management-server
       - JAVA_TOOL_OPTIONS=-javaagent:/otel/opentelemetry-javaagent.jar
     volumes:
       - ./otel/opentelemetry-javaagent.jar:/otel/opentelemetry-javaagent.jar:ro
@@ -61,9 +62,10 @@ services:
       - "CUSTOMERCORE_BASEURL=http://customer-core:8110"
       - "SPRING_BOOT_ADMIN_CLIENT_URL=http://spring-boot-admin:9000"
       - OTEL_SERVICE_NAME=customer-management-backend
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4317
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
       - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_INSTRUMENTATION_COMMON_PEER_SERVICE_MAPPING=customer-core:8110=customer-core,policy-management-backend:8090=policy-management-backend,customer-management-backend:8100=customer-management-backend,customer-self-service-backend:8080=customer-self-service-backend,spring-boot-admin:9000=spring-boot-admin,risk-management-server:50051=risk-management-server
       - JAVA_TOOL_OPTIONS=-javaagent:/otel/opentelemetry-javaagent.jar
     volumes:
       - ./otel/opentelemetry-javaagent.jar:/otel/opentelemetry-javaagent.jar:ro
@@ -91,9 +93,10 @@ services:
       - "CUSTOMERCORE_BASEURL=http://customer-core:8110"
       - "SPRING_BOOT_ADMIN_CLIENT_URL=http://spring-boot-admin:9000"
       - OTEL_SERVICE_NAME=policy-management-backend
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4317
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
       - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_INSTRUMENTATION_COMMON_PEER_SERVICE_MAPPING=customer-core:8110=customer-core,policy-management-backend:8090=policy-management-backend,customer-management-backend:8100=customer-management-backend,customer-self-service-backend:8080=customer-self-service-backend,spring-boot-admin:9000=spring-boot-admin,risk-management-server:50051=risk-management-server
       - JAVA_TOOL_OPTIONS=-javaagent:/otel/opentelemetry-javaagent.jar
     volumes:
       - ./otel/opentelemetry-javaagent.jar:/otel/opentelemetry-javaagent.jar:ro
@@ -123,9 +126,10 @@ services:
       - "POLICYMANAGEMENT_TCPBROKERBINDADDRESS=tcp://policy-management-backend:61616"
       - "SPRING_BOOT_ADMIN_CLIENT_URL=http://spring-boot-admin:9000"
       - OTEL_SERVICE_NAME=customer-self-service-backend
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4317
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
       - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_INSTRUMENTATION_COMMON_PEER_SERVICE_MAPPING=customer-core:8110=customer-core,policy-management-backend:8090=policy-management-backend,customer-management-backend:8100=customer-management-backend,customer-self-service-backend:8080=customer-self-service-backend,spring-boot-admin:9000=spring-boot-admin,risk-management-server:50051=risk-management-server
       - JAVA_TOOL_OPTIONS=-javaagent:/otel/opentelemetry-javaagent.jar
     volumes:
       - ./otel/opentelemetry-javaagent.jar:/otel/opentelemetry-javaagent.jar:ro
@@ -155,8 +159,10 @@ services:
       - "ACTIVEMQ_HOST=policy-management-backend"
       - "ACTIVEMQ_PORT=61613"
       - OTEL_SERVICE_NAME=risk-management-server
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4317
-
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+      - OTEL_LOG_LEVEL=debug
+      - OTEL_INSTRUMENTATION_COMMON_PEER_SERVICE_MAPPING=customer-core:8110=customer-core,policy-management-backend:8090=policy-management-backend,customer-management-backend:8100=customer-management-backend,customer-self-service-backend:8080=customer-self-service-backend,spring-boot-admin:9000=spring-boot-admin,risk-management-server:50051=risk-management-server
     ports:
       - "50051:50051"
 
@@ -168,8 +174,19 @@ services:
       - "16686:16686"
       - "14250:14250"
       - "14268:14268"
+    
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.96.0
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otelcol/config.yaml:ro
+    ports:
       - "4317:4317"
       - "4318:4318"
+    depends_on:
+      - jaeger
+
+
 
 
 
