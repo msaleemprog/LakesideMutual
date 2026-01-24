@@ -1,0 +1,115 @@
+<svg width="1485px" height="347px"
+ viewBox="0.00 0.00 1113.52 260.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform=" rotate(0) translate(4 256)">
+<title>%0</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-256 1109.5201,-256 1109.5201,4 -4,4"/>
+<!-- customer_management_backend -->
+<g id="node1" class="node">
+<title>customer_management_backend</title>
+<ellipse fill="none" stroke="#000000" cx="138.1441" cy="-162" rx="137.7087" ry="18"/>
+<text text-anchor="middle" x="138.1441" y="-157.8" font-family="Times,serif" font-size="14.00" fill="#000000">customer_management_backend</text>
+</g>
+<!-- customer_core -->
+<g id="node2" class="node">
+<title>customer_core</title>
+<ellipse fill="none" stroke="#000000" cx="635.1441" cy="-18" rx="67.7567" ry="18"/>
+<text text-anchor="middle" x="635.1441" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">customer_core</text>
+</g>
+<!-- customer_management_backend&#45;&gt;customer_core -->
+<g id="edge1" class="edge">
+<title>customer_management_backend&#45;&gt;customer_core</title>
+<path fill="none" stroke="#0000ff" d="M195.1563,-145.4814C291.1967,-117.6548 484.0611,-61.7746 579.3059,-34.1785"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="580.4115,-37.5022 589.0425,-31.3574 578.4634,-30.7787 580.4115,-37.5022"/>
+</g>
+<!-- customer_management_frontend -->
+<g id="node3" class="node">
+<title>customer_management_frontend</title>
+<ellipse fill="none" stroke="#000000" cx="138.1441" cy="-234" rx="138.2884" ry="18"/>
+<text text-anchor="middle" x="138.1441" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">customer_management_frontend</text>
+</g>
+<!-- customer_management_frontend&#45;&gt;customer_management_backend -->
+<g id="edge2" class="edge">
+<title>customer_management_frontend&#45;&gt;customer_management_backend</title>
+<path fill="none" stroke="#0000ff" d="M138.1441,-215.8314C138.1441,-208.131 138.1441,-198.9743 138.1441,-190.4166"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="141.6442,-190.4132 138.1441,-180.4133 134.6442,-190.4133 141.6442,-190.4132"/>
+</g>
+<!-- policy_management_backend -->
+<g id="node4" class="node">
+<title>policy_management_backend</title>
+<ellipse fill="none" stroke="#000000" cx="635.1441" cy="-90" rx="126.1946" ry="18"/>
+<text text-anchor="middle" x="635.1441" y="-85.8" font-family="Times,serif" font-size="14.00" fill="#000000">policy_management_backend</text>
+</g>
+<!-- policy_management_backend&#45;&gt;customer_core -->
+<g id="edge3" class="edge">
+<title>policy_management_backend&#45;&gt;customer_core</title>
+<path fill="none" stroke="#0000ff" d="M635.1441,-71.8314C635.1441,-64.131 635.1441,-54.9743 635.1441,-46.4166"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="638.6442,-46.4132 635.1441,-36.4133 631.6442,-46.4133 638.6442,-46.4132"/>
+</g>
+<!-- policy_management_frontend -->
+<g id="node5" class="node">
+<title>policy_management_frontend</title>
+<ellipse fill="none" stroke="#000000" cx="420.1441" cy="-162" rx="126.7741" ry="18"/>
+<text text-anchor="middle" x="420.1441" y="-157.8" font-family="Times,serif" font-size="14.00" fill="#000000">policy_management_frontend</text>
+</g>
+<!-- policy_management_frontend&#45;&gt;policy_management_backend -->
+<g id="edge4" class="edge">
+<title>policy_management_frontend&#45;&gt;policy_management_backend</title>
+<path fill="none" stroke="#0000ff" d="M469.7394,-145.3913C501.3434,-134.8077 542.4646,-121.0369 575.799,-109.8737"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="577.0554,-113.1441 585.4263,-106.6497 574.8325,-106.5064 577.0554,-113.1441"/>
+</g>
+<!-- customer_self_service_backend -->
+<g id="node6" class="node">
+<title>customer_self_service_backend</title>
+<ellipse fill="none" stroke="#000000" cx="971.1441" cy="-162" rx="134.2521" ry="18"/>
+<text text-anchor="middle" x="971.1441" y="-157.8" font-family="Times,serif" font-size="14.00" fill="#000000">customer_self_service_backend</text>
+</g>
+<!-- customer_self_service_backend&#45;&gt;customer_core -->
+<g id="edge6" class="edge">
+<title>customer_self_service_backend&#45;&gt;customer_core</title>
+<path fill="none" stroke="#0000ff" d="M933.557,-144.6227C893.3248,-126.1513 827.5282,-96.3122 770.1441,-72 741.4963,-59.8626 709.1405,-46.8951 683.2879,-36.7104"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="684.3066,-33.3502 673.7193,-32.9508 681.7467,-39.8654 684.3066,-33.3502"/>
+</g>
+<!-- customer_self_service_backend&#45;&gt;policy_management_backend -->
+<g id="edge5" class="edge">
+<title>customer_self_service_backend&#45;&gt;policy_management_backend</title>
+<path fill="none" stroke="#0000ff" d="M899.8872,-146.7307C845.733,-135.1262 771.2345,-119.1622 715.0584,-107.1245"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="715.6576,-103.6735 705.1462,-105.0004 714.1908,-110.5181 715.6576,-103.6735"/>
+</g>
+<!-- customer_self_service_frontend -->
+<g id="node7" class="node">
+<title>customer_self_service_frontend</title>
+<ellipse fill="none" stroke="#000000" cx="575.1441" cy="-234" rx="134.8316" ry="18"/>
+<text text-anchor="middle" x="575.1441" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">customer_self_service_frontend</text>
+</g>
+<!-- customer_self_service_frontend&#45;&gt;customer_management_backend -->
+<g id="edge9" class="edge">
+<title>customer_self_service_frontend&#45;&gt;customer_management_backend</title>
+<path fill="none" stroke="#0000ff" d="M490.1085,-219.9896C416.681,-207.8917 310.6583,-190.4234 234.1889,-177.8243"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="234.5093,-174.33 224.0733,-176.1577 233.3713,-181.2369 234.5093,-174.33"/>
+</g>
+<!-- customer_self_service_frontend&#45;&gt;policy_management_backend -->
+<g id="edge8" class="edge">
+<title>customer_self_service_frontend&#45;&gt;policy_management_backend</title>
+<path fill="none" stroke="#0000ff" d="M576.636,-215.6774C578.6964,-196.9522 583.4558,-167.3838 594.1441,-144 598.6216,-134.2043 605.1361,-124.5125 611.6595,-116.1017"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="614.5214,-118.1297 618.1108,-108.1615 609.0885,-113.7156 614.5214,-118.1297"/>
+</g>
+<!-- customer_self_service_frontend&#45;&gt;customer_self_service_backend -->
+<g id="edge7" class="edge">
+<title>customer_self_service_frontend&#45;&gt;customer_self_service_backend</title>
+<path fill="none" stroke="#0000ff" d="M655.2806,-219.4297C720.7643,-207.5236 813.2907,-190.7006 881.2798,-178.339"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="881.9142,-181.7811 891.1268,-176.5486 880.662,-174.894 881.9142,-181.7811"/>
+</g>
+<!-- risk_management_server -->
+<g id="node8" class="node">
+<title>risk_management_server</title>
+<ellipse fill="none" stroke="#000000" cx="711.1441" cy="-162" rx="108.2067" ry="18"/>
+<text text-anchor="middle" x="711.1441" y="-157.8" font-family="Times,serif" font-size="14.00" fill="#000000">risk_management_server</text>
+</g>
+<!-- risk_management_server&#45;&gt;policy_management_backend -->
+<g id="edge10" class="edge">
+<title>risk_management_server&#45;&gt;policy_management_backend</title>
+<path fill="none" stroke="#0000ff" d="M692.3576,-144.2022C683.0402,-135.3752 671.6314,-124.5669 661.4598,-114.9307"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="663.6446,-112.1792 653.9779,-107.8425 658.8303,-117.2609 663.6446,-112.1792"/>
+</g>
+</g>
+</svg>
