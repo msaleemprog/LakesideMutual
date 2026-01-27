@@ -163,6 +163,8 @@ services:
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
       - OTEL_LOG_LEVEL=debug
       - OTEL_INSTRUMENTATION_COMMON_PEER_SERVICE_MAPPING=customer-core:8110=customer-core,policy-management-backend:8090=policy-management-backend,customer-management-backend:8100=customer-management-backend,customer-self-service-backend:8080=customer-self-service-backend,spring-boot-admin:9000=spring-boot-admin,risk-management-server:50051=risk-management-server
+      - GRPC_HOST=0.0.0.0
+      - GRPC_PORT=50051
     ports:
       - "50051:50051"
 

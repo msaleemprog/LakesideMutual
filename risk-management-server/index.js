@@ -11,6 +11,7 @@ const protoLoader = require('@grpc/proto-loader')
 const grpc = require('@grpc/grpc-js')
 const DataManager = require('./lib/data-manager')
 const ReportGenerator = require('./lib/report-generator')
+const { ReflectionService } = require('@grpc/reflection')
 
 nconf
   .argv()
@@ -138,11 +139,18 @@ function startGRPCServer(dataManager) {
   const PROTO_PATH = path.join(__dirname, '/riskmanagement.proto')
   const packageDefinition = protoLoader.loadSync(PROTO_PATH)
   const proto = grpc.loadPackageDefinition(packageDefinition).riskmanagement
+
   const server = new grpc.Server()
+
   const requestHandler = handleClientRequest.bind(null, dataManager)
   server.addService(proto.RiskManagement.service, {
     trigger: requestHandler,
   })
+
+
+  const reflection = new ReflectionService(packageDefinition)
+  reflection.addToServer(server)
+
   server.bindAsync(
     `${grpc_config.host}:${grpc_config.port}`,
     grpc.ServerCredentials.createInsecure(),
@@ -154,6 +162,7 @@ function startGRPCServer(dataManager) {
     }
   )
 }
+
 
 process.on('unhandledRejection', (err) => {
   console.error(err)
