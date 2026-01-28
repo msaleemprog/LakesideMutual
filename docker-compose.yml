@@ -49,6 +49,7 @@ services:
       - OTEL_INSTRUMENTATION_COMMON_PEER_SERVICE_MAPPING=customer-core:8110=customer-core,policy-management-backend:8090=policy-management-backend,customer-management-backend:8100=customer-management-backend,customer-self-service-backend:8080=customer-self-service-backend,spring-boot-admin:9000=spring-boot-admin,risk-management-server:50051=risk-management-server
       - JAVA_TOOL_OPTIONS=-javaagent:/otel/opentelemetry-javaagent.jar
     volumes:
+      - ./db/customer-core:/data
       - ./otel/opentelemetry-javaagent.jar:/otel/opentelemetry-javaagent.jar:ro
     ports:
       - "8110:8110"
@@ -68,6 +69,7 @@ services:
       - OTEL_INSTRUMENTATION_COMMON_PEER_SERVICE_MAPPING=customer-core:8110=customer-core,policy-management-backend:8090=policy-management-backend,customer-management-backend:8100=customer-management-backend,customer-self-service-backend:8080=customer-self-service-backend,spring-boot-admin:9000=spring-boot-admin,risk-management-server:50051=risk-management-server
       - JAVA_TOOL_OPTIONS=-javaagent:/otel/opentelemetry-javaagent.jar
     volumes:
+      - ./db/customer-management:/data
       - ./otel/opentelemetry-javaagent.jar:/otel/opentelemetry-javaagent.jar:ro
     ports:
       - "8100:8100"
@@ -99,6 +101,7 @@ services:
       - OTEL_INSTRUMENTATION_COMMON_PEER_SERVICE_MAPPING=customer-core:8110=customer-core,policy-management-backend:8090=policy-management-backend,customer-management-backend:8100=customer-management-backend,customer-self-service-backend:8080=customer-self-service-backend,spring-boot-admin:9000=spring-boot-admin,risk-management-server:50051=risk-management-server
       - JAVA_TOOL_OPTIONS=-javaagent:/otel/opentelemetry-javaagent.jar
     volumes:
+      - ./db/policy-management:/data
       - ./otel/opentelemetry-javaagent.jar:/otel/opentelemetry-javaagent.jar:ro
     ports:
       - "8090:8090"
@@ -132,6 +135,7 @@ services:
       - OTEL_INSTRUMENTATION_COMMON_PEER_SERVICE_MAPPING=customer-core:8110=customer-core,policy-management-backend:8090=policy-management-backend,customer-management-backend:8100=customer-management-backend,customer-self-service-backend:8080=customer-self-service-backend,spring-boot-admin:9000=spring-boot-admin,risk-management-server:50051=risk-management-server
       - JAVA_TOOL_OPTIONS=-javaagent:/otel/opentelemetry-javaagent.jar
     volumes:
+      - ./db/customer-self-service:/data
       - ./otel/opentelemetry-javaagent.jar:/otel/opentelemetry-javaagent.jar:ro
     ports:
       - "8080:8080"
