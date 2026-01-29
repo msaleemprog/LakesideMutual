@@ -42,7 +42,7 @@ services:
     depends_on:
       - customer-core
     environment:
-      - "CUSTOMERCORE_BASEURL=http://customer-core:8110"
+      - "CUSTOMERCORE_BASEURL=http://host.docker.internal:8085"
       - "SPRING_BOOT_ADMIN_CLIENT_URL=http://spring-boot-admin:9000"
     ports:
       - "8100:8100"
@@ -65,7 +65,7 @@ services:
     depends_on:
       - customer-core
     environment:
-      - "CUSTOMERCORE_BASEURL=http://customer-core:8110"
+      - "CUSTOMERCORE_BASEURL=http://host.docker.internal:8085"
       - "SPRING_BOOT_ADMIN_CLIENT_URL=http://spring-boot-admin:9000"
     ports:
       - "8090:8090"
@@ -89,7 +89,7 @@ services:
       - customer-core
       - policy-management-backend
     environment:
-      - "CUSTOMERCORE_BASEURL=http://customer-core:8110"
+      - "CUSTOMERCORE_BASEURL=http://host.docker.internal:8085"
       - "POLICYMANAGEMENT_TCPBROKERBINDADDRESS=tcp://policy-management-backend:61616"
       - "SPRING_BOOT_ADMIN_CLIENT_URL=http://spring-boot-admin:9000"
     ports:
