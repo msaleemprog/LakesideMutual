@@ -16,6 +16,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  config:
+    import: optional:classpath:application-customerselfservice.properties
 
 apikey:
   header: Authorization
