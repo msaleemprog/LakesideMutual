@@ -20,8 +20,8 @@ import org.microserviceapipatterns.domaindrivendesign.ValueObject;
  * good reasons: strategic DD suggests that model boundaries decouple (sub-)systems so that they can be deployed and
  * evolved independently.
  * */
-@Entity
-@Table(name = "addresses")
+@Entity(name = "CustomerSelfServiceAddress")
+@Table(name = "css_address")
 public class Address implements ValueObject {
 	@GeneratedValue
 	@Id

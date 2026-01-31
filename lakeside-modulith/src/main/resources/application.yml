@@ -18,6 +18,9 @@ spring:
       ddl-auto: update
   config:
     import: optional:classpath:application-customerselfservice.properties
+  jms:
+    listener:
+      auto-startup: false
 
 apikey:
   header: Authorization

@@ -29,7 +29,7 @@ import com.lakesidemutual.customerselfservice.infrastructure.UserLoginRepository
  * The run() method of the DataLoader class is automatically executed when the application launches.
  * It populates the database with sample user logins that can be used to test the application.
  * */
-@Component
+@Component("customerSelfServiceDataLoader")
 @Profile("!test")
 public class DataLoader implements ApplicationRunner {
 	@Autowired

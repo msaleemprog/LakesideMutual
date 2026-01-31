@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lakesidemutual.customerselfservice.infrastructure.CustomerCoreRemoteProxy;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.city.CitiesResponseDto;
-
+import org.springframework.context.annotation.Profile;
 /**
  * This REST controller allows clients to retrieve a list of cities that match a given postal code. It is an application of
  * the <a href="https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/ReferenceDataHolder">Reference Data Holder</a> pattern.
@@ -20,7 +20,8 @@ import com.lakesidemutual.customerselfservice.interfaces.dtos.city.CitiesRespons
  * @see <a href=
  *      "https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/ReferenceDataHolder">https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/ReferenceDataHolder</a>
  */
-@RestController
+@Profile("customerselfservice-cities")
+@RestController("customerSelfServiceCityReferenceDataHolder")
 @RequestMapping("/cities")
 public class CityReferenceDataHolder {
 	@Autowired

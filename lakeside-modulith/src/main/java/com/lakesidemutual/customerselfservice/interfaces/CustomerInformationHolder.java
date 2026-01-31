@@ -37,6 +37,7 @@ import com.lakesidemutual.customerselfservice.interfaces.dtos.customer.CustomerN
 import com.lakesidemutual.customerselfservice.interfaces.dtos.customer.CustomerProfileUpdateRequestDto;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.customer.CustomerRegistrationRequestDto;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequest.InsuranceQuoteRequestDto;
+import org.springframework.context.annotation.Profile;
 
 /**
  * This REST controller gives clients access to the customer data. It is an example of the
@@ -45,7 +46,8 @@ import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequ
  * @see <a href="https://www.microservice-api-patterns.org/patterns/responsibility/endpointRoles/InformationHolderResource">Information Holder Resource</a>
  * @see <a href="https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/MasterDataHolder">Master Data Holder</a>
  */
-@RestController
+@Profile("customerselfservice-customers")
+@RestController("customerSelfServiceCustomerInformationHolder")
 @RequestMapping("/customers")
 public class CustomerInformationHolder {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());

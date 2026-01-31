@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.annotation.Profile;
 
 import com.lakesidemutual.customerselfservice.domain.identityaccess.UserLoginEntity;
 import com.lakesidemutual.customerselfservice.infrastructure.UserLoginRepository;
@@ -36,6 +37,7 @@ import com.lakesidemutual.customerselfservice.interfaces.dtos.identityaccess.Use
 /**
  * This class is a REST Controller that is used to authenticate existing users and to sign up new users.
  * */
+@Profile("customerselfservice-security")
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {

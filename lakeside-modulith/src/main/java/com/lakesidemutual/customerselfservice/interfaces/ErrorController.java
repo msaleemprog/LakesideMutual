@@ -13,12 +13,14 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.context.annotation.Profile;
 
 /**
  * This class implements a custom error controller that returns an <a href=
  * "https://www.microservice-api-patterns.org/patterns/quality/qualityManagementAndGovernance/ErrorReport">Error
  * Report</a>.
  */
+@Profile("customerselfservice-error")
 @Controller
 public class ErrorController extends AbstractErrorController {
 

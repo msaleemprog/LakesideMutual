@@ -19,7 +19,6 @@ import org.microserviceapipatterns.domaindrivendesign.ValueObject;
  */
 @Entity
 @Table(name = "requeststatuschanges")
-@Embeddable
 public class RequestStatusChange implements ValueObject {
 	@GeneratedValue
 	@Id

@@ -21,6 +21,7 @@ import org.springframework.security.web.csrf.CsrfTokenRequestHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.context.annotation.Profile;
 
 import java.util.Arrays;
 
@@ -30,6 +31,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
  * The WebSecurityConfiguration class configures the security policies used for the exposed HTTP resource API.
  * In this case, it ensures that only authenticated users can access the API.
  */
+@Profile("customerselfservice-security")
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
