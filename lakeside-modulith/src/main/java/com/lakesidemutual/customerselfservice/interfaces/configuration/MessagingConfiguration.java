@@ -12,11 +12,12 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
-
+import org.springframework.context.annotation.Profile;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteExpiredEvent;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteResponseEvent;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.PolicyCreatedEvent;
 
+@Profile("jms")
 @Configuration
 public class MessagingConfiguration {
 	@Value("${policymanagement.tcpBrokerBindAddress}")

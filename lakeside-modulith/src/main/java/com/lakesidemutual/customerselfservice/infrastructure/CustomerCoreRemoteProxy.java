@@ -22,8 +22,9 @@ import java.util.List;
  * CustomerCoreRemoteProxy is a remote proxy that interacts with the Customer Core in order to give
  * the Customer Self-Service Backend's own clients access to the shared customer data.
  */
+@org.springframework.context.annotation.Profile("customer-core-http")
 @Component
-public class CustomerCoreRemoteProxy implements InfrastructureService, CustomerCoreServiceMBean {
+public class CustomerCoreRemoteProxy implements CustomerCoreClient, InfrastructureService, CustomerCoreServiceMBean {
     @Value("${customercore.baseURL}")
     private String customerCoreBaseURL;
 

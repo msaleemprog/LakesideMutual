@@ -1,1 +1,1 @@
-[]
+[{"name":"com.lakesidemutual.customerselfservice.interfaces.PolicyCreatedMessageConsumer","comment":"PolicyCreatedMessageConsumer is a Spring component that consumes PolicyCreatedEvents as they arrive through the ActiveMQ message queue. It processes these events by updating the status of the corresponding insurance quote requests."}]

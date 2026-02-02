@@ -21,15 +21,8 @@ spring:
     listener:
       auto-startup: false
 
-customercore:
-  baseURL: http://localhost:8085/customer-core
-
 management:
   endpoints:
     web:
       exposure:
         include: health,info
-
-apikey:
-  header: Authorization
-  validkeys: dev-key

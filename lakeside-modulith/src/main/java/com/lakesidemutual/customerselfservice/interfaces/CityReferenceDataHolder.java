@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lakesidemutual.customerselfservice.infrastructure.CustomerCoreRemoteProxy;
+import com.lakesidemutual.customerselfservice.infrastructure.CustomerCoreClient;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.city.CitiesResponseDto;
 import org.springframework.context.annotation.Profile;
 /**
@@ -25,13 +25,13 @@ import org.springframework.context.annotation.Profile;
 @RequestMapping("/cities")
 public class CityReferenceDataHolder {
 	@Autowired
-	private CustomerCoreRemoteProxy customerCoreRemoteProxy;
+	private CustomerCoreClient customerCoreClient;
 
 	@Operation(summary = "Get the cities for a particular postal code.")
 	@GetMapping(value = "/{postalCode}")
 	public ResponseEntity<CitiesResponseDto> getCitiesForPostalCode(
 			@Parameter(description = "the postal code", required = true) @PathVariable String postalCode) {
 
-		return customerCoreRemoteProxy.getCitiesForPostalCode(postalCode);
+		return customerCoreClient.getCitiesForPostalCode(postalCode);
 	}
 }

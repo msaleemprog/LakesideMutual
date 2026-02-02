@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import com.lakesidemutual.customerselfservice.infrastructure.InsuranceQuoteReque
  * as they arrive through the ActiveMQ message queue. It processes these events by updating
  * the status of the corresponding insurance quote requests.
  * */
+@Profile("jms")
 @Component
 public class PolicyCreatedMessageConsumer {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());

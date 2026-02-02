@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lakesidemutual.customerselfservice.domain.customer.CustomerId;
 import com.lakesidemutual.customerselfservice.domain.identityaccess.UserLoginEntity;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteRequestAggregateRoot;
-import com.lakesidemutual.customerselfservice.infrastructure.CustomerCoreRemoteProxy;
+import com.lakesidemutual.customerselfservice.infrastructure.CustomerCoreClient;
 import com.lakesidemutual.customerselfservice.infrastructure.InsuranceQuoteRequestRepository;
 import com.lakesidemutual.customerselfservice.infrastructure.UserLoginRepository;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.customer.AddressDto;
@@ -59,7 +59,7 @@ public class CustomerInformationHolder {
 	private InsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
 
 	@Autowired
-	private CustomerCoreRemoteProxy customerCoreRemoteProxy;
+	private CustomerCoreClient customerCoreClient;
 
 	@Operation(summary = "Change a customer's address.")
 	@PreAuthorize("isAuthenticated()")
@@ -67,7 +67,7 @@ public class CustomerInformationHolder {
 	public ResponseEntity<AddressDto> changeAddress(
 			@Parameter(description = "the customer's unique id", required = true) @PathVariable CustomerId customerId,
 			@Parameter(description = "the customer's new address", required = true) @Valid @RequestBody AddressDto requestDto) {
-		return customerCoreRemoteProxy.changeAddress(customerId, requestDto);
+		return customerCoreClient.changeAddress(customerId, requestDto);
 	}
 
 	@Operation(summary = "Get customer with a given customer id.")
@@ -77,7 +77,7 @@ public class CustomerInformationHolder {
 			Authentication authentication,
 			@Parameter(description = "the customer's unique id", required = true) @PathVariable CustomerId customerId) {
 
-		CustomerDto customer = customerCoreRemoteProxy.getCustomer(customerId);
+		CustomerDto customer = customerCoreClient.getCustomer(customerId);
 		if(customer == null) {
 			final String errorMessage = "Failed to find a customer with id '" + customerId.getId() + "'.";
 			logger.info(errorMessage);
@@ -98,7 +98,7 @@ public class CustomerInformationHolder {
 		CustomerProfileUpdateRequestDto dto = new CustomerProfileUpdateRequestDto(
 				requestDto.getFirstname(), requestDto.getLastname(), requestDto.getBirthday(), requestDto.getStreetAddress(),
 				requestDto.getPostalCode(), requestDto.getCity(), loggedInUserEmail, requestDto.getPhoneNumber());
-		CustomerDto customer = customerCoreRemoteProxy.createCustomer(dto);
+		CustomerDto customer = customerCoreClient.createCustomer(dto);
 		UserLoginEntity loggedInUser = userLoginRepository.findByEmail(loggedInUserEmail);
 		loggedInUser.setCustomerId(new CustomerId(customer.getCustomerId()));
 		userLoginRepository.save(loggedInUser);
