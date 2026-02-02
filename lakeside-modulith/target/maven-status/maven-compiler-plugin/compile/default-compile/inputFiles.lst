@@ -1,3 +1,7 @@
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\CustomerCoreApi.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\CustomerCoreApiImpl.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\CustomerCoreFacade.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\CustomerSummary.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\application\CustomerService.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\application\DataLoader.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\application\Page.java
@@ -30,6 +34,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\OldCustomerInformationHolder.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\validation\PhoneNumber.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\validation\PhoneNumberValidator.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\package-info.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\application\DataLoader.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\domain\customer\Address.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\domain\customer\CustomerId.java
@@ -57,6 +62,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\AuthenticationController.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\CityReferenceDataHolder.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\configuration\AuthenticationTokenFilter.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\configuration\CustomerSelfServiceMigrationSecurityConfig.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\configuration\DefaultAuthenticatedRestTemplateClient.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\configuration\HeaderRequestInterceptor.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\configuration\JwtUtils.java

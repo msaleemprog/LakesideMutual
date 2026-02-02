@@ -37,7 +37,7 @@ import com.lakesidemutual.customerselfservice.interfaces.dtos.identityaccess.Use
 /**
  * This class is a REST Controller that is used to authenticate existing users and to sign up new users.
  * */
-@Profile("customerselfservice-security")
+@Profile({"migration", "customerselfservice-security"})
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {

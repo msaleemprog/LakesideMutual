@@ -37,22 +37,28 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity
 public class WebSecurityConfiguration {
     private static final String[] AUTH_WHITELIST = {
-            // -- Swagger UI v3 (OpenAPI)
-            "/v3/api-docs/**",
-            "/swagger-ui/**",
-            // spring-boot-starter-actuator health checks and other info
-            "/actuator/**",
-            "/actuator",
-            // Other whitelisted endpoints,
-            "/customers",
-            "/customers/**",
-            "/cities",
-            "/cities/**",
-            "/insurance-quote-requests",
-            "/insurance-quote-requests/**",
-            "/auth/**",
-            "/console/**"
-    };
+        // -- Swagger UI v3 (OpenAPI)
+        "/v3/api-docs/**",
+        "/swagger-ui/**",
+
+        // spring-boot-starter-actuator health checks and other info
+        "/actuator/**",
+        "/actuator",
+
+        // Customer Core module (namespaced endpoints)
+        "/customer-core",
+        "/customer-core/**",
+
+        // Other whitelisted endpoints
+        "/customers",
+        "/customers/**",
+        "/cities",
+        "/cities/**",
+        "/insurance-quote-requests",
+        "/insurance-quote-requests/**",
+        "/auth/**",
+        "/console/**"
+     };
 
     @Autowired
     private UnauthorizedHandler unauthorizedHandler;

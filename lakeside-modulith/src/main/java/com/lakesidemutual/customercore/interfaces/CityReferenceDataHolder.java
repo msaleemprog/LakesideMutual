@@ -23,7 +23,7 @@ import com.lakesidemutual.customercore.interfaces.dtos.city.CitiesResponseDto;
  *      "https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/ReferenceDataHolder">https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/ReferenceDataHolder</a>
  */
 @RestController
-@RequestMapping("/cities")
+@RequestMapping("/customer-core/cities")
 public class CityReferenceDataHolder {
 	@Autowired
 	private CityLookupService cityLookupService;

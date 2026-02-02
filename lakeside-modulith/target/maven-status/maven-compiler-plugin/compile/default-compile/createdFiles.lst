@@ -5,11 +5,14 @@ com\lakesidemutual\customerselfservice\domain\insurancequoterequest\MoneyAmount.
 com\lakesidemutual\customercore\interfaces\CustomerInformationHolder.class
 com\lakesidemutual\customerselfservice\infrastructure\CustomerCoreRemoteProxy.class
 com\lakesidemutual\customerselfservice\interfaces\configuration\RateLimitInterceptor.class
+com\lakesidemutual\customerselfservice\interfaces\configuration\CustomerSelfServiceMigrationSecurityConfig.class
 com\lakesidemutual\customercore\interfaces\validation\PhoneNumberValidator.class
 com\lakesidemutual\customercore\interfaces\dtos\customer\PaginatedCustomerResponseDto.class
 com\lakesidemutual\customerselfservice\interfaces\dtos\insurancequoterequest\InsuranceQuoteRequestDto.class
 com\lakesidemutual\customerselfservice\interfaces\dtos\customer\CustomerRegistrationRequestDto.class
+com\lakesidemutual\customercore\package-info.class
 com\lakesidemutual\customerselfservice\domain\insurancequoterequest\InsuranceQuoteResponseEvent.class
+com\lakesidemutual\customercore\api\CustomerCoreFacade.class
 com\lakesidemutual\customerselfservice\domain\insurancequoterequest\RequestStatus.class
 com\lakesidemutual\customerselfservice\interfaces\dtos\insurancequoterequest\InsuranceQuoteResponseDto.class
 com\lakesidemutual\customercore\interfaces\dtos\customer\CustomerNotFoundException.class
@@ -38,6 +41,7 @@ com\lakesidemutual\MigrationPermitAllSecurityConfig.class
 com\lakesidemutual\customercore\interfaces\dtos\city\CitiesResponseDto.class
 com\lakesidemutual\customerselfservice\domain\identityaccess\UserDetailsServiceImpl.class
 com\lakesidemutual\customerselfservice\interfaces\dtos\customer\CustomerIdDto.class
+com\lakesidemutual\customercore\api\CustomerCoreApiImpl.class
 com\lakesidemutual\customerselfservice\domain\insurancequoterequest\InsuranceQuoteExpiredEvent.class
 com\lakesidemutual\customerselfservice\interfaces\dtos\insurancequoterequest\CustomerInfoDto.class
 com\lakesidemutual\customercore\domain\customer\CustomerAggregateRoot.class
@@ -82,11 +86,13 @@ com\lakesidemutual\customerselfservice\interfaces\validation\PhoneNumberValidato
 com\lakesidemutual\customerselfservice\domain\customer\CustomerId.class
 com\lakesidemutual\customercore\domain\customer\CustomerProfileEntity.class
 com\lakesidemutual\customercore\interfaces\configuration\WebServicesConfiguration.class
+com\lakesidemutual\customercore\api\CustomerCoreApi.class
 com\lakesidemutual\customerselfservice\interfaces\dtos\customer\AddressDto.class
 com\lakesidemutual\customercore\interfaces\dtos\customer\CustomerResponseDto.class
 com\lakesidemutual\customerselfservice\domain\identityaccess\UserSecurityDetails.class
 com\lakesidemutual\customercore\application\Page.class
 com\lakesidemutual\customercore\interfaces\configuration\WebSecurityConfiguration.class
+com\lakesidemutual\customercore\api\CustomerSummary.class
 com\lakesidemutual\LakesideModulithApplication.class
 com\lakesidemutual\customerselfservice\domain\insurancequoterequest\PolicyCreatedEvent.class
 com\lakesidemutual\customerselfservice\interfaces\dtos\customer\CustomersDto.class

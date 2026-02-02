@@ -37,7 +37,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  */
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/customer-core/customers")
 public class CustomerInformationHolder {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());

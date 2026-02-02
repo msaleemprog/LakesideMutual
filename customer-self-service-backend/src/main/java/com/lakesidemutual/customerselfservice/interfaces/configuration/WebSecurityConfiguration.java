@@ -30,6 +30,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
  * The WebSecurityConfiguration class configures the security policies used for the exposed HTTP resource API.
  * In this case, it ensures that only authenticated users can access the API.
  */
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
