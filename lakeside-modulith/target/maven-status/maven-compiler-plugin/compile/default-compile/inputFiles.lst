@@ -1,7 +1,14 @@
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\CustomerCoreApi.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\CustomerCoreApiImpl.java
-C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\CustomerCoreFacade.java
-C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\CustomerSummary.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\dto\AddressDto.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\dto\CitiesResponseDto.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\dto\CustomerNotFoundException.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\dto\CustomerProfileUpdateRequestDto.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\dto\CustomerResponseDto.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\dto\CustomersResponseDto.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\dto\package-info.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\dto\PaginatedCustomerResponseDto.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\api\package-info.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\application\CustomerService.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\application\DataLoader.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\application\Page.java
@@ -12,6 +19,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\domain\customer\CustomerFactory.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\domain\customer\CustomerId.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\domain\customer\CustomerProfileEntity.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\domain\customer\package-info.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\infrastructure\CustomerRepository.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\CityReferenceDataHolder.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\configuration\APIKeyAuthenticationManager.java
@@ -24,11 +32,13 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\converters\StringToCustomerIdConverter.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\CustomerInformationHolder.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\dtos\city\CitiesResponseDto.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\dtos\city\package-info.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\dtos\customer\AddressDto.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\dtos\customer\CustomerNotFoundException.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\dtos\customer\CustomerProfileUpdateRequestDto.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\dtos\customer\CustomerResponseDto.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\dtos\customer\CustomersResponseDto.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\dtos\customer\package-info.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\dtos\customer\PaginatedCustomerResponseDto.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\ErrorController.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customercore\interfaces\OldCustomerInformationHolder.java
@@ -108,6 +118,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\UserInformationHolder.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\validation\PhoneNumber.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\validation\PhoneNumberValidator.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\package-info.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\LakesideModulithApplication.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\MigrationPermitAllSecurityConfig.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\MigrationSecurityConfiguration.java

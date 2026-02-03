@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lakesidemutual.customercore.domain.city.CityLookupService;
-import com.lakesidemutual.customercore.interfaces.dtos.city.CitiesResponseDto;
+import com.lakesidemutual.customercore.api.dto.CitiesResponseDto;
 
 /**
  * This REST controller allows clients to retrieve a list of cities that match a given postal code. It is an application of

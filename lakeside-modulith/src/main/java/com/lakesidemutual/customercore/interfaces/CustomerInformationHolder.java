@@ -6,7 +6,7 @@ import com.lakesidemutual.customercore.domain.customer.Address;
 import com.lakesidemutual.customercore.domain.customer.CustomerAggregateRoot;
 import com.lakesidemutual.customercore.domain.customer.CustomerId;
 import com.lakesidemutual.customercore.domain.customer.CustomerProfileEntity;
-import com.lakesidemutual.customercore.interfaces.dtos.customer.*;
+import com.lakesidemutual.customercore.api.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;

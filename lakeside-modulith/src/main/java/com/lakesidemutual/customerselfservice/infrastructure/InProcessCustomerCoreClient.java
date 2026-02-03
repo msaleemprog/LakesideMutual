@@ -1,8 +1,5 @@
 package com.lakesidemutual.customerselfservice.infrastructure;
 
-import com.lakesidemutual.customercore.interfaces.CityReferenceDataHolder;
-import com.lakesidemutual.customercore.interfaces.CustomerInformationHolder;
-import com.lakesidemutual.customercore.interfaces.dtos.customer.CustomersResponseDto;
 import com.lakesidemutual.customerselfservice.domain.customer.CustomerId;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.city.CitiesResponseDto;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.customer.AddressDto;
@@ -19,27 +16,23 @@ import java.util.List;
 @Component
 public class InProcessCustomerCoreClient implements CustomerCoreClient {
 
-    private final CustomerInformationHolder customerCoreController;
-    private final CityReferenceDataHolder cityCoreController;
+    private final com.lakesidemutual.customercore.api.CustomerCoreApi customerCoreApi;
 
-    public InProcessCustomerCoreClient(CustomerInformationHolder customerCoreController,
-                                       CityReferenceDataHolder cityCoreController) {
-        this.customerCoreController = customerCoreController;
-        this.cityCoreController = cityCoreController;
+    public InProcessCustomerCoreClient(com.lakesidemutual.customercore.api.CustomerCoreApi customerCoreApi) {
+        this.customerCoreApi = customerCoreApi;
     }
 
     @Override
     public CustomerDto getCustomer(CustomerId customerId) {
-        // Customer Core controller returns wrapper with list; we take the first element.
-        ResponseEntity<CustomersResponseDto> response =
-                customerCoreController.getCustomer(customerId.getId(), "");
+        // API uses String id now
+        com.lakesidemutual.customercore.api.dto.CustomersResponseDto body =
+                customerCoreApi.getCustomer(customerId.getId(), "");
 
-        CustomersResponseDto body = response.getBody();
         if (body == null || body.getCustomers() == null || body.getCustomers().isEmpty()) {
             return null;
         }
 
-        com.lakesidemutual.customercore.interfaces.dtos.customer.CustomerResponseDto coreCustomer =
+        com.lakesidemutual.customercore.api.dto.CustomerResponseDto coreCustomer =
                 body.getCustomers().get(0);
 
         return mapCoreCustomerToSelfService(coreCustomer);
@@ -47,17 +40,13 @@ public class InProcessCustomerCoreClient implements CustomerCoreClient {
 
     @Override
     public ResponseEntity<AddressDto> changeAddress(CustomerId customerId, AddressDto requestDto) {
-        com.lakesidemutual.customercore.interfaces.dtos.customer.AddressDto coreAddress =
+        com.lakesidemutual.customercore.api.dto.AddressDto coreAddress =
                 mapSelfServiceAddressToCore(requestDto);
 
-        ResponseEntity<com.lakesidemutual.customercore.interfaces.dtos.customer.AddressDto> coreResponse =
-        customerCoreController.changeAddress(
-                new com.lakesidemutual.customercore.domain.customer.CustomerId(customerId.getId()),
-                coreAddress
-        );
+        ResponseEntity<com.lakesidemutual.customercore.api.dto.AddressDto> coreResponse =
+                customerCoreApi.changeAddress(customerId.getId(), coreAddress);
 
-        com.lakesidemutual.customercore.interfaces.dtos.customer.AddressDto body = coreResponse.getBody();
-
+        com.lakesidemutual.customercore.api.dto.AddressDto body = coreResponse.getBody();
         AddressDto mapped = (body != null) ? mapCoreAddressToSelfService(body) : null;
 
         return ResponseEntity.status(coreResponse.getStatusCode()).body(mapped);
@@ -65,13 +54,13 @@ public class InProcessCustomerCoreClient implements CustomerCoreClient {
 
     @Override
     public CustomerDto createCustomer(CustomerProfileUpdateRequestDto requestDto) {
-        com.lakesidemutual.customercore.interfaces.dtos.customer.CustomerProfileUpdateRequestDto coreReq =
+        com.lakesidemutual.customercore.api.dto.CustomerProfileUpdateRequestDto coreReq =
                 mapSelfServiceProfileUpdateToCore(requestDto);
 
-        ResponseEntity<com.lakesidemutual.customercore.interfaces.dtos.customer.CustomerResponseDto> coreResponse =
-                customerCoreController.createCustomer(coreReq);
+        ResponseEntity<com.lakesidemutual.customercore.api.dto.CustomerResponseDto> coreResponse =
+                customerCoreApi.createCustomer(coreReq);
 
-        com.lakesidemutual.customercore.interfaces.dtos.customer.CustomerResponseDto body = coreResponse.getBody();
+        com.lakesidemutual.customercore.api.dto.CustomerResponseDto body = coreResponse.getBody();
         if (body == null) return null;
 
         return mapCoreCustomerToSelfService(body);
@@ -79,10 +68,10 @@ public class InProcessCustomerCoreClient implements CustomerCoreClient {
 
     @Override
     public ResponseEntity<CitiesResponseDto> getCitiesForPostalCode(String postalCode) {
-        ResponseEntity<com.lakesidemutual.customercore.interfaces.dtos.city.CitiesResponseDto> coreResponse =
-                cityCoreController.getCitiesForPostalCode(postalCode);
+        ResponseEntity<com.lakesidemutual.customercore.api.dto.CitiesResponseDto> coreResponse =
+                customerCoreApi.getCitiesForPostalCode(postalCode);
 
-        com.lakesidemutual.customercore.interfaces.dtos.city.CitiesResponseDto body = coreResponse.getBody();
+        com.lakesidemutual.customercore.api.dto.CitiesResponseDto body = coreResponse.getBody();
 
         CitiesResponseDto mapped = new CitiesResponseDto();
         mapped.setCities(body != null ? body.getCities() : List.of());
@@ -90,10 +79,10 @@ public class InProcessCustomerCoreClient implements CustomerCoreClient {
         return ResponseEntity.status(coreResponse.getStatusCode()).body(mapped);
     }
 
-    // ----------------- mapping helpers using existing DTOs -----------------
+    // ----------------- mapping helpers -----------------
 
     private CustomerDto mapCoreCustomerToSelfService(
-            com.lakesidemutual.customercore.interfaces.dtos.customer.CustomerResponseDto core) {
+            com.lakesidemutual.customercore.api.dto.CustomerResponseDto core) {
 
         CustomerDto dto = new CustomerDto();
         dto.setCustomerId(core.getCustomerId());
@@ -114,17 +103,16 @@ public class InProcessCustomerCoreClient implements CustomerCoreClient {
         return dto;
     }
 
-    private com.lakesidemutual.customercore.interfaces.dtos.customer.AddressDto mapSelfServiceAddressToCore(AddressDto dto) {
-        com.lakesidemutual.customercore.interfaces.dtos.customer.AddressDto core =
-                new com.lakesidemutual.customercore.interfaces.dtos.customer.AddressDto();
+    private com.lakesidemutual.customercore.api.dto.AddressDto mapSelfServiceAddressToCore(AddressDto dto) {
+        com.lakesidemutual.customercore.api.dto.AddressDto core =
+                new com.lakesidemutual.customercore.api.dto.AddressDto();
         core.setStreetAddress(dto.getStreetAddress());
         core.setPostalCode(dto.getPostalCode());
         core.setCity(dto.getCity());
         return core;
     }
 
-    private AddressDto mapCoreAddressToSelfService(
-            com.lakesidemutual.customercore.interfaces.dtos.customer.AddressDto core) {
+    private AddressDto mapCoreAddressToSelfService(com.lakesidemutual.customercore.api.dto.AddressDto core) {
         AddressDto dto = new AddressDto();
         dto.setStreetAddress(core.getStreetAddress());
         dto.setPostalCode(core.getPostalCode());
@@ -132,11 +120,11 @@ public class InProcessCustomerCoreClient implements CustomerCoreClient {
         return dto;
     }
 
-    private com.lakesidemutual.customercore.interfaces.dtos.customer.CustomerProfileUpdateRequestDto
+    private com.lakesidemutual.customercore.api.dto.CustomerProfileUpdateRequestDto
     mapSelfServiceProfileUpdateToCore(CustomerProfileUpdateRequestDto dto) {
 
-        com.lakesidemutual.customercore.interfaces.dtos.customer.CustomerProfileUpdateRequestDto core =
-                new com.lakesidemutual.customercore.interfaces.dtos.customer.CustomerProfileUpdateRequestDto();
+        com.lakesidemutual.customercore.api.dto.CustomerProfileUpdateRequestDto core =
+                new com.lakesidemutual.customercore.api.dto.CustomerProfileUpdateRequestDto();
 
         core.setFirstname(dto.getFirstname());
         core.setLastname(dto.getLastname());
