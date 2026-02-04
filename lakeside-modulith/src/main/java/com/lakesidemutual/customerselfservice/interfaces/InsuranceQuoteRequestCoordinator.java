@@ -37,7 +37,9 @@ import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequ
 import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequest.InsuranceQuoteRequestDto;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequest.InsuranceQuoteRequestNotFoundException;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequest.InsuranceQuoteResponseDto;
-
+import org.springframework.context.ApplicationEventPublisher;
+import com.lakesidemutual.customerselfservice.api.InsuranceQuoteRequestSubmitted;
+import com.lakesidemutual.customerselfservice.api.CustomerDecisionSubmitted;
 
 /**
  * This REST controller gives clients access to the insurance quote requests. It is an example of the
@@ -67,6 +69,8 @@ public class InsuranceQuoteRequestCoordinator {
 	@Autowired
 	private PolicyManagementMessageProducer policyManagementMessageProducer;
 
+	@Autowired
+	private ApplicationEventPublisher events;
 	/**
 	 * This endpoint is only used for debugging purposes.
 	 * */
@@ -129,6 +133,12 @@ public class InsuranceQuoteRequestCoordinator {
 		final Date date = new Date();
 		InsuranceQuoteRequestAggregateRoot insuranceQuoteRequest = new InsuranceQuoteRequestAggregateRoot(date, RequestStatus.REQUEST_SUBMITTED, customerInfoEntity, insuranceOptionsEntity, null, null);
 		insuranceQuoteRequestRepository.save(insuranceQuoteRequest);
+		events.publishEvent(new InsuranceQuoteRequestSubmitted(
+        	insuranceQuoteRequest.getId(),
+        	date,
+        	customerId.getId()
+		));
+		
 		InsuranceQuoteRequestDto responseDto = InsuranceQuoteRequestDto.fromDomainObject(insuranceQuoteRequest);
 
 		policyManagementMessageProducer.sendInsuranceQuoteRequest(date, responseDto);
@@ -177,6 +187,11 @@ public class InsuranceQuoteRequestCoordinator {
 			policyManagementMessageProducer.sendCustomerDecision(date, insuranceQuoteRequest.getId(), false);
 		}
 		insuranceQuoteRequestRepository.save(insuranceQuoteRequest);
+		events.publishEvent(new CustomerDecisionSubmitted(
+        	insuranceQuoteRequest.getId(),
+        	date,
+        	insuranceQuoteResponseDto.getStatus().equals(RequestStatus.QUOTE_ACCEPTED.toString())
+		));
 
 		InsuranceQuoteRequestDto insuranceQuoteRequestDto = InsuranceQuoteRequestDto.fromDomainObject(insuranceQuoteRequest);
 		return ResponseEntity.ok(insuranceQuoteRequestDto);
