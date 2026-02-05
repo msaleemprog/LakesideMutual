@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteExpiredEvent;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteRequestAggregateRoot;
-import com.lakesidemutual.customerselfservice.infrastructure.InsuranceQuoteRequestRepository;
+import com.lakesidemutual.customerselfservice.infrastructure.CustomerSelfServiceInsuranceQuoteRequestRepository;
 
 /**
  * InsuranceQuoteExpiredMessageConsumer is a Spring component that consumes InsuranceQuoteExpiredEvents
@@ -23,7 +23,7 @@ public class InsuranceQuoteExpiredMessageConsumer {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private InsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
+	private CustomerSelfServiceInsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
 
 	@JmsListener(destination = "${insuranceQuoteExpiredEvent.queueName}")
 	public void receiveInsuranceQuoteExpiredEvent(final Message<InsuranceQuoteExpiredEvent> message) {

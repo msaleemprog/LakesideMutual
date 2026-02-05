@@ -1,9 +1,6 @@
 package com.lakesidemutual.customercore.domain.customer;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.Embeddable;
 import org.microserviceapipatterns.domaindrivendesign.ValueObject;
 
 import java.util.Objects;
@@ -15,12 +12,8 @@ import java.util.Objects;
  * This discrepancy exists for technical reasons. JPA requires Address to be declared as an entity, because it is part of a one-to-many
  * relationship. However, in the DDD sense, Address behaves like a Value Object (i.e., it has no id and is immutable).
  * */
-@Entity
-@Table(name = "addresses")
+@Embeddable
 public class Address implements ValueObject {
-	@GeneratedValue
-	@Id
-	private Long id;
 
 	private final String streetAddress;
 

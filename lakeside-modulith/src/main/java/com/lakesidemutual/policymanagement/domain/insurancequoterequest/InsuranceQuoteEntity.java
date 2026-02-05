@@ -17,8 +17,8 @@ import com.lakesidemutual.policymanagement.domain.policy.MoneyAmount;
  * InsuranceQuoteEntity is an entity that represents an Insurance Quote
  * which has been submitted as a response to a specific Insurance Quote Request.
  */
-@Entity
-@Table(name = "insurancequotes")
+@Entity(name = "PolicyManagementInsuranceQuote")
+@Table(name = "pm_insurancequotes")
 public class InsuranceQuoteEntity implements org.microserviceapipatterns.domaindrivendesign.Entity {
 	@GeneratedValue
 	@Id

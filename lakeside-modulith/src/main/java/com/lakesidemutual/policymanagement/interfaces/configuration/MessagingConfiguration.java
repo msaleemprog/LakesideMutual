@@ -10,6 +10,7 @@ import org.apache.activemq.usage.SystemUsage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
@@ -23,18 +24,19 @@ import java.util.Map;
  * The MessagingConfiguration class configures the ActiveMQ message broker. This broker is used
  * to send events to the Risk Management Server when a policy changes.
  */
+@Profile("microservices")
 @Configuration
 public class MessagingConfiguration {
-    @Value("${policymanagement.stompBrokerBindAddress}")
+    @Value("${policymanagement.stompBrokerBindAddress:localhost}")
     private String stompBrokerBindAddress;
 
-    @Value("${policymanagement.tcpBrokerBindAddress}")
+    @Value("${policymanagement.tcpBrokerBindAddress:localhost}")
     private String tcpBrokerBindAddress;
 
-    @Value("${spring.activemq.user}")
+    @Value("${spring.activemq.user:localhost}")
     private String username;
 
-    @Value("${spring.activemq.password}")
+    @Value("${spring.activemq.password:localhost}")
     private String password;
 
     @Bean

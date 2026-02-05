@@ -3,25 +3,22 @@ package com.lakesidemutual.customerselfservice.domain.insurancequoterequest;
 import java.util.Date;
 import java.util.Objects;
 
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import org.microserviceapipatterns.domaindrivendesign.ValueObject;
 
-/**
- * An instance of RequestStatusChange is a value object that represents a status change
- * of an insurance quote request. It contains the date of the status change as well as the new status.
- */
 @Entity
 @Table(name = "requeststatuschanges")
 public class RequestStatusChange implements ValueObject {
-	@GeneratedValue
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private Date date;
@@ -29,13 +26,17 @@ public class RequestStatusChange implements ValueObject {
 	@Enumerated(EnumType.STRING)
 	private RequestStatus status;
 
-	public RequestStatusChange() {}
+	protected RequestStatusChange() {
+		// JPA
+	}
 
 	public RequestStatusChange(Date date, RequestStatus status) {
-		Objects.requireNonNull(date);
-		Objects.requireNonNull(status);
-		this.date = date;
-		this.status = status;
+		this.date = Objects.requireNonNull(date);
+		this.status = Objects.requireNonNull(status);
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public Date getDate() {
@@ -48,22 +49,18 @@ public class RequestStatusChange implements ValueObject {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-
+		if (this == obj) return true;
+		if (obj == null || getClass() != obj.getClass()) return false;
 		RequestStatusChange other = (RequestStatusChange) obj;
-		return Objects.equals(date, other.date) && Objects.equals(status, other.status);
+
+		if (id != null && other.id != null) {
+			return Objects.equals(id, other.id);
+		}
+		return Objects.equals(date, other.date) && status == other.status;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(date, status);
+		return (id != null) ? Objects.hash(id) : Objects.hash(date, status);
 	}
 }

@@ -38,11 +38,10 @@ import com.lakesidemutual.policymanagement.domain.policy.PolicyAggregateRoot;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyId;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyPeriod;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyType;
-import com.lakesidemutual.policymanagement.domain.policy.UpdatePolicyEvent;
-import com.lakesidemutual.policymanagement.infrastructure.CustomerCoreRemoteProxy;
+
 import com.lakesidemutual.policymanagement.infrastructure.PolicyRepository;
 import com.lakesidemutual.policymanagement.infrastructure.RiskManagementMessageProducer;
-import com.lakesidemutual.policymanagement.interfaces.dtos.UnknownCustomerException;
+
 import com.lakesidemutual.policymanagement.interfaces.dtos.customer.CustomerDto;
 import com.lakesidemutual.policymanagement.interfaces.dtos.policy.CreatePolicyRequestDto;
 import com.lakesidemutual.policymanagement.interfaces.dtos.policy.PaginatedPolicyResponseDto;
@@ -67,9 +66,6 @@ public class PolicyInformationHolder {
 	@Autowired
 	private RiskManagementMessageProducer riskManagementMessageProducer;
 
-	@Autowired
-	private CustomerCoreRemoteProxy customerCoreRemoteProxy;
-
 	@Operation(summary = "Create a new policy.")
 	@PostMapping
 	public ResponseEntity<PolicyDto> createPolicy(
@@ -81,12 +77,7 @@ public class PolicyInformationHolder {
 		String customerIdString = createPolicyDto.getCustomerId();
 		logger.info("Creating a new policy for customer with id '{}'", customerIdString);
 		CustomerId customerId = new CustomerId(customerIdString);
-		List<CustomerDto> customers = customerCoreRemoteProxy.getCustomersById(customerId);
-		if(customers.isEmpty()) {
-			final String errorMessage = "Failed to find a customer with id '{}'";
-			logger.warn(errorMessage, customerId.getId());
-			throw new UnknownCustomerException(errorMessage);
-		}
+		
 
 		PolicyId id = PolicyId.random();
 		PolicyType policyType = new PolicyType(createPolicyDto.getPolicyType());
@@ -98,10 +89,9 @@ public class PolicyInformationHolder {
 		PolicyAggregateRoot policy = new PolicyAggregateRoot(id, customerId, new Date(), policyPeriod, policyType, deductible, policyLimit, insurancePremium, insuringAgreement);
 		policyRepository.save(policy);
 
-		CustomerDto customer = customers.get(0);
+		
 		PolicyDto policyDto = createPolicyDtos(Arrays.asList(policy), "").get(0);
-		final UpdatePolicyEvent event = new UpdatePolicyEvent(request.getRemoteAddr(), new Date(), customer, policyDto);
-		riskManagementMessageProducer.emitEvent(event);
+
 		return ResponseEntity.ok(policyDto);
 	}
 
@@ -121,12 +111,7 @@ public class PolicyInformationHolder {
 		}
 
 		CustomerId customerId = new CustomerId(createPolicyDto.getCustomerId());
-		List<CustomerDto> customers = customerCoreRemoteProxy.getCustomersById(customerId);
-		if(customers.isEmpty()) {
-			final String errorMessage = "Failed to find a customer with id '{}'";
-			logger.warn(errorMessage, customerId.getId());
-			throw new UnknownCustomerException(errorMessage);
-		}
+
 
 		PolicyType policyType = new PolicyType(createPolicyDto.getPolicyType());
 		PolicyPeriod policyPeriod = createPolicyDto.getPolicyPeriod().toDomainObject();
@@ -144,10 +129,9 @@ public class PolicyInformationHolder {
 		policy.setInsuringAgreement(insuringAgreement);
 		policyRepository.save(policy);
 
-		CustomerDto customer = customers.get(0);
+
 		PolicyDto policyDto = createPolicyDtos(Arrays.asList(policy), "").get(0);
-		final UpdatePolicyEvent event = new UpdatePolicyEvent(request.getRemoteAddr(), new Date(), customer, policyDto);
-		riskManagementMessageProducer.emitEvent(event);
+
 
 		PolicyDto response = createPolicyDtos(Arrays.asList(policy), "").get(0);
 		return ResponseEntity.ok(response);
@@ -171,7 +155,7 @@ public class PolicyInformationHolder {
 		List<CustomerDto> customers = null;
 		if(expand.equals("customer")) {
 			List<CustomerId> customerIds = policies.stream().map(p -> p.getCustomerId()).collect(Collectors.toList());
-			customers = customerCoreRemoteProxy.getCustomersById(customerIds.toArray(new CustomerId[customerIds.size()]));
+			
 		}
 
 		List<PolicyDto> policyDtos = new ArrayList<>();

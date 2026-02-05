@@ -2,17 +2,14 @@ package com.lakesidemutual.policymanagement.domain.insurancequoterequest;
 
 import java.util.Objects;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.Embeddable;
 
 import org.microserviceapipatterns.domaindrivendesign.ValueObject;
 
 /**
  * An Address is a value object that is used to represent the postal address of a customer.
  *
- * You might be wondering why the Address class implements the ValueObject interface even though it has a JPA @Entity annotation.
+ * You might be wondering why the Address class implements the ValueObject interface even though it has a JPA @Entity(name = "PolicyManagementAddress") annotation.
  * This discrepancy exists for technical reasons. JPA requires Address to be declared as an entity, because it is part of a one-to-many
  * relationship. However, in the DDD sense, Address behaves like a value object.
  *
@@ -20,12 +17,8 @@ import org.microserviceapipatterns.domaindrivendesign.ValueObject;
  * good reasons: strategic DD suggests that model boundaries decouple (sub-)systems so that they can be deployed and
  * evolved independently.
  * */
-@Entity
-@Table(name = "addresses")
+@Embeddable
 public class Address implements ValueObject {
-	@GeneratedValue
-	@Id
-	private Long id;
 
 	private final String streetAddress;
 

@@ -30,7 +30,7 @@ import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.Custo
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceOptionsEntity;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteRequestAggregateRoot;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.RequestStatus;
-import com.lakesidemutual.customerselfservice.infrastructure.InsuranceQuoteRequestRepository;
+import com.lakesidemutual.customerselfservice.infrastructure.CustomerSelfServiceInsuranceQuoteRequestRepository;
 import com.lakesidemutual.customerselfservice.infrastructure.PolicyManagementMessageProducer;
 import com.lakesidemutual.customerselfservice.infrastructure.UserLoginRepository;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequest.CustomerInfoDto;
@@ -38,9 +38,13 @@ import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequ
 import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequest.InsuranceQuoteRequestNotFoundException;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequest.InsuranceQuoteResponseDto;
 import org.springframework.context.ApplicationEventPublisher;
-import com.lakesidemutual.customerselfservice.api.InsuranceQuoteRequestSubmitted;
-import com.lakesidemutual.customerselfservice.api.CustomerDecisionSubmitted;
 
+import com.lakesidemutual.customerselfservice.api.CustomerDecisionSubmitted;
+import com.lakesidemutual.customerselfservice.api.Address;
+import com.lakesidemutual.customerselfservice.api.CustomerInfo;
+import com.lakesidemutual.customerselfservice.api.InsuranceOptions;
+import com.lakesidemutual.customerselfservice.api.InsuranceQuoteRequestSubmitted;
+import com.lakesidemutual.customerselfservice.api.Money;
 /**
  * This REST controller gives clients access to the insurance quote requests. It is an example of the
  * <i>Information Holder Resource</i> pattern. This particular one is a special type of information holder called <i>Operational Data Holder</i>.
@@ -61,7 +65,7 @@ public class InsuranceQuoteRequestCoordinator {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private InsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
+	private CustomerSelfServiceInsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
 
 	@Autowired
 	private UserLoginRepository userLoginRepository;
@@ -133,11 +137,35 @@ public class InsuranceQuoteRequestCoordinator {
 		final Date date = new Date();
 		InsuranceQuoteRequestAggregateRoot insuranceQuoteRequest = new InsuranceQuoteRequestAggregateRoot(date, RequestStatus.REQUEST_SUBMITTED, customerInfoEntity, insuranceOptionsEntity, null, null);
 		insuranceQuoteRequestRepository.save(insuranceQuoteRequest);
-		events.publishEvent(new InsuranceQuoteRequestSubmitted(
-        	insuranceQuoteRequest.getId(),
-        	date,
-        	customerId.getId()
-		));
+		
+		var ci = insuranceQuoteRequest.getCustomerInfo();
+var contact = ci.getContactAddress();
+var billing = ci.getBillingAddress();
+
+var customerInfoEvent = new CustomerInfo(
+        ci.getCustomerId().getId(),
+        ci.getFirstname(),
+        ci.getLastname(),
+        new Address(contact.getStreetAddress(), contact.getPostalCode(), contact.getCity()),
+        new Address(billing.getStreetAddress(), billing.getPostalCode(), billing.getCity())
+);
+
+var io = insuranceQuoteRequest.getInsuranceOptions();
+var deductible = io.getDeductible();
+
+var optionsEvent = new InsuranceOptions(
+        io.getStartDate(),
+        io.getInsuranceType().getName(),
+        new Money(deductible.getAmount(), deductible.getCurrency().getCurrencyCode())
+);
+
+events.publishEvent(new InsuranceQuoteRequestSubmitted(
+        insuranceQuoteRequest.getId(),
+        date,
+        customerInfoEvent,
+        optionsEvent
+));
+
 		
 		InsuranceQuoteRequestDto responseDto = InsuranceQuoteRequestDto.fromDomainObject(insuranceQuoteRequest);
 

@@ -12,8 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteRequestAggregateRoot;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.PolicyCreatedEvent;
-import com.lakesidemutual.customerselfservice.infrastructure.InsuranceQuoteRequestRepository;
-
+import com.lakesidemutual.customerselfservice.infrastructure.CustomerSelfServiceInsuranceQuoteRequestRepository;
 /**
  * PolicyCreatedMessageConsumer is a Spring component that consumes PolicyCreatedEvents
  * as they arrive through the ActiveMQ message queue. It processes these events by updating
@@ -25,7 +24,7 @@ public class PolicyCreatedMessageConsumer {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private InsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
+	private CustomerSelfServiceInsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
 
 	@JmsListener(destination = "${policyCreatedEvent.queueName}")
 	public void receivePolicyCreatedEvent(final Message<PolicyCreatedEvent> message) {

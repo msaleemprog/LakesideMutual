@@ -27,7 +27,7 @@ import com.lakesidemutual.policymanagement.infrastructure.PolicyRepository;
  * The run() method of the DataLoader class is automatically executed when the application launches.
  * It populates the database with sample policies that can be used to test the application.
  * */
-@Component
+@Component("policyManagementDataLoader")
 public class DataLoader implements ApplicationRunner {
 	@Autowired
 	private PolicyRepository policyRepository;

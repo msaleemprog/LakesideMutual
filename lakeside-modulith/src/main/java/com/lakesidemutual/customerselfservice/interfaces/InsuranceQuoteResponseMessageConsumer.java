@@ -14,7 +14,7 @@ import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.Insur
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteRequestAggregateRoot;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteResponseEvent;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.MoneyAmount;
-import com.lakesidemutual.customerselfservice.infrastructure.InsuranceQuoteRequestRepository;
+import com.lakesidemutual.customerselfservice.infrastructure.CustomerSelfServiceInsuranceQuoteRequestRepository;
 
 /**
  * InsuranceQuoteResponseMessageConsumer is a Spring component that consumes InsuranceQuoteResponseEvents
@@ -26,7 +26,7 @@ public class InsuranceQuoteResponseMessageConsumer {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private InsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
+	private CustomerSelfServiceInsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
 
 	@JmsListener(destination = "${insuranceQuoteResponseEvent.queueName}")
 	public void receiveInsuranceQuoteResponse(final Message<InsuranceQuoteResponseEvent> message) {

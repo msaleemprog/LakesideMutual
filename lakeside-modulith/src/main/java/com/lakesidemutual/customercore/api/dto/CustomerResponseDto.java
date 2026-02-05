@@ -6,7 +6,6 @@ import java.util.Set;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import com.lakesidemutual.customercore.domain.customer.Address;
 import com.lakesidemutual.customercore.domain.customer.CustomerAggregateRoot;
 import com.lakesidemutual.customercore.domain.customer.CustomerProfileEntity;
 
@@ -34,7 +33,7 @@ public class CustomerResponseDto extends RepresentationModel {
 
 	private final String phoneNumber;
 
-	private final Collection<Address> moveHistory;
+	private final Collection<AddressResponseDto> moveHistory;
 
 	public CustomerResponseDto(Set<String> includedFields, CustomerAggregateRoot customer) {
 		this.customerId = select(includedFields, "customerId", customer.getId().getId());
@@ -48,7 +47,14 @@ public class CustomerResponseDto extends RepresentationModel {
 		this.city = select(includedFields, "city", profile.getCurrentAddress().getCity());
 		this.email = select(includedFields, "email", profile.getEmail());
 		this.phoneNumber = select(includedFields, "phoneNumber", profile.getPhoneNumber());
-		this.moveHistory = select(includedFields, "moveHistory", profile.getMoveHistory());
+		var mh = profile.getMoveHistory() == null
+        ? null
+        : profile.getMoveHistory().stream()
+            .map(a -> new AddressResponseDto(a.getStreetAddress(), a.getPostalCode(), a.getCity()))
+            .toList();
+
+this.moveHistory = select(includedFields, "moveHistory", mh);
+
 	}
 
 	private static <T> T select(Set<String> includedFields, String fieldName, T value) {
@@ -95,7 +101,7 @@ public class CustomerResponseDto extends RepresentationModel {
 		return phoneNumber;
 	}
 
-	public Collection<Address> getMoveHistory() {
-		return moveHistory;
+	public Collection<AddressResponseDto> getMoveHistory() {
+    	return moveHistory;
 	}
 }

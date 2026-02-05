@@ -1,12 +1,17 @@
 package com.lakesidemutual.customercore.domain.customer;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,14 +41,27 @@ public class CustomerProfileEntity implements Serializable, org.microserviceapip
      * The usage of the javax.persistance annotations breaks the strict layering. We do this deliberately here, because the relatively small
      * size of this application does not warrant the additional complexity of having a separate infrastructure data model (yet).
      */
-    @OneToOne(cascade = CascadeType.ALL)
+    @Embedded
     private Address currentAddress;
 
     private String email;
 
     private String phoneNumber;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    /**
+     * Address is a value object (@Embeddable), so moveHistory must be mapped as an ElementCollection
+     * (NOT OneToMany).
+     */
+    @ElementCollection
+    @CollectionTable(
+            name = "cc_customer_move_history",
+            joinColumns = @JoinColumn(name = "customer_profile_id")
+    )
+    @AttributeOverrides({
+            @AttributeOverride(name = "street",     column = @Column(name = "street")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "postal_code")),
+            @AttributeOverride(name = "city",       column = @Column(name = "city"))
+    })
     private Collection<Address> moveHistory;
 
     public CustomerProfileEntity() {

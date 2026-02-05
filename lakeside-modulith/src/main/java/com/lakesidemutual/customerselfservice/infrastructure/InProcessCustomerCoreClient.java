@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Profile("!customer-core-http")
+@Profile("customerselfservice")
 @Component
 public class InProcessCustomerCoreClient implements CustomerCoreClient {
 

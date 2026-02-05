@@ -17,8 +17,8 @@ import com.lakesidemutual.policymanagement.domain.policy.MoneyAmount;
  * InsuranceOptionsEntity is an entity that contains the insurance options (e.g., start date, insurance type, etc.)
  * that a customer selected for an Insurance Quote Request.
  */
-@Entity
-@Table(name = "insuranceoptions")
+@Entity(name = "PolicyManagementInsuranceOptions")
+@Table(name = "pm_insuranceoptions")
 public class InsuranceOptionsEntity implements org.microserviceapipatterns.domaindrivendesign.Entity {
 	@GeneratedValue
 	@Id

@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.lakesidemutual.policymanagement.domain.insurancequoterequest.InsuranceQuoteExpiredEvent;
 import com.lakesidemutual.policymanagement.domain.insurancequoterequest.InsuranceQuoteRequestAggregateRoot;
 import com.lakesidemutual.policymanagement.infrastructure.CustomerSelfServiceMessageProducer;
-import com.lakesidemutual.policymanagement.infrastructure.InsuranceQuoteRequestRepository;
+import com.lakesidemutual.policymanagement.infrastructure.PolicyInsuranceQuoteRequestRepository;
 
 /**
  * ExpirationCheckerJob is a Quartz job that periodically checks for expired insurance quotes. For each
@@ -27,7 +27,7 @@ public class ExpirationCheckerJob implements Job {
 	private CustomerSelfServiceMessageProducer customerSelfServiceMessageProducer;
 
 	@Autowired
-	private InsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
+	private PolicyInsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
 
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {

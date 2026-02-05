@@ -1,7 +1,7 @@
 @org.springframework.modulith.ApplicationModule(
-        allowedDependencies = {
-                "customercore::api",
-                "customerselfservice::api" 
-        }
+  allowedDependencies = {
+    "customerselfservice::api",
+    "customercore::api"
+  }
 )
 package com.lakesidemutual.policymanagement;

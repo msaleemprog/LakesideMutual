@@ -1,4 +1,2 @@
-@org.springframework.modulith.ApplicationModule(
-        allowedDependencies = {"customercore::api"}
-)
+@org.springframework.modulith.ApplicationModule
 package com.lakesidemutual.customerselfservice;

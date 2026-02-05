@@ -16,7 +16,7 @@ import com.lakesidemutual.policymanagement.domain.insurancequoterequest.Insuranc
 import com.lakesidemutual.policymanagement.domain.insurancequoterequest.InsuranceQuoteRequestAggregateRoot;
 import com.lakesidemutual.policymanagement.domain.insurancequoterequest.InsuranceQuoteRequestEvent;
 import com.lakesidemutual.policymanagement.domain.insurancequoterequest.RequestStatus;
-import com.lakesidemutual.policymanagement.infrastructure.InsuranceQuoteRequestRepository;
+import com.lakesidemutual.policymanagement.infrastructure.PolicyInsuranceQuoteRequestRepository;
 import com.lakesidemutual.policymanagement.interfaces.dtos.insurancequoterequest.InsuranceQuoteRequestDto;
 import com.lakesidemutual.policymanagement.interfaces.dtos.insurancequoterequest.RequestStatusChangeDto;
 
@@ -30,23 +30,29 @@ public class InsuranceQuoteRequestMessageConsumer {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private InsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
+	private PolicyInsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
 
 	@JmsListener(destination = "${insuranceQuoteRequestEvent.queueName}")
-	public void receiveInsuranceQuoteRequest(final Message<InsuranceQuoteRequestEvent> message) {
-		logger.info("A new InsuranceQuoteRequestEvent has been received.");
+  	public void receiveInsuranceQuoteRequest(final Message<InsuranceQuoteRequestEvent> message) {
+      handleInsuranceQuoteRequestEvent(message.getPayload());
+  	}
 
-		InsuranceQuoteRequestEvent insuranceQuoteRequestEvent = message.getPayload();
-		InsuranceQuoteRequestDto insuranceQuoteRequestDto = insuranceQuoteRequestEvent.getInsuranceQuoteRequestDto();
-		Long id = insuranceQuoteRequestDto.getId();
-		Date date = insuranceQuoteRequestDto.getDate();
-		List<RequestStatusChangeDto> statusHistory = insuranceQuoteRequestDto.getStatusHistory();
-		RequestStatus status = RequestStatus.valueOf(statusHistory.get(statusHistory.size()-1).getStatus());
+  	// NEW: transport-agnostic handler
+  	public void handleInsuranceQuoteRequestEvent(InsuranceQuoteRequestEvent insuranceQuoteRequestEvent) {
+      logger.info("A new InsuranceQuoteRequestEvent has been received.");
 
-		CustomerInfoEntity customerInfo = insuranceQuoteRequestDto.getCustomerInfo().toDomainObject();
-		InsuranceOptionsEntity insuranceOptions = insuranceQuoteRequestDto.getInsuranceOptions().toDomainObject();
+      InsuranceQuoteRequestDto insuranceQuoteRequestDto = insuranceQuoteRequestEvent.getInsuranceQuoteRequestDto();
+      Long id = insuranceQuoteRequestDto.getId();
+      Date date = insuranceQuoteRequestDto.getDate();
+      List<RequestStatusChangeDto> statusHistory = insuranceQuoteRequestDto.getStatusHistory();
+      RequestStatus status = RequestStatus.valueOf(statusHistory.get(statusHistory.size()-1).getStatus());
 
-		InsuranceQuoteRequestAggregateRoot insuranceQuoteAggregateRoot = new InsuranceQuoteRequestAggregateRoot(id, date, status, customerInfo, insuranceOptions, null, null);
-		insuranceQuoteRequestRepository.save(insuranceQuoteAggregateRoot);
-	}
+      CustomerInfoEntity customerInfo = insuranceQuoteRequestDto.getCustomerInfo().toDomainObject();
+      InsuranceOptionsEntity insuranceOptions = insuranceQuoteRequestDto.getInsuranceOptions().toDomainObject();
+
+      InsuranceQuoteRequestAggregateRoot insuranceQuoteAggregateRoot =
+          new InsuranceQuoteRequestAggregateRoot(id, date, status, customerInfo, insuranceOptions, null, null);
+
+      insuranceQuoteRequestRepository.save(insuranceQuoteAggregateRoot);
+  }
 }

@@ -12,7 +12,7 @@ import org.microserviceapipatterns.domaindrivendesign.ValueObject;
 /**
  * An Address is a value object that is used to represent the postal address of a customer.
  *
- * You might be wondering why the Address class implements the ValueObject interface even though it has a JPA @Entity annotation.
+ * You might be wondering why the Address class implements the ValueObject interface even though it has a JPA @Entity(name = "CustomerSelfServiceCustomerAddress") annotation.
  * This discrepancy exists for technical reasons. JPA requires Address to be declared as an entity, because it is part of a one-to-many
  * relationship. However, in the DDD sense, Address behaves like a value object.
  *
@@ -21,7 +21,7 @@ import org.microserviceapipatterns.domaindrivendesign.ValueObject;
  * evolved independently.
  * */
 @Entity(name = "CustomerSelfServiceAddress")
-@Table(name = "css_address")
+@Table(name = "css_customer_addresses")
 public class Address implements ValueObject {
 	@GeneratedValue
 	@Id

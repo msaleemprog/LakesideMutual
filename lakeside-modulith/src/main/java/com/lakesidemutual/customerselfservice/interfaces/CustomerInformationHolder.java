@@ -29,7 +29,7 @@ import com.lakesidemutual.customerselfservice.domain.customer.CustomerId;
 import com.lakesidemutual.customerselfservice.domain.identityaccess.UserLoginEntity;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteRequestAggregateRoot;
 import com.lakesidemutual.customerselfservice.infrastructure.CustomerCoreClient;
-import com.lakesidemutual.customerselfservice.infrastructure.InsuranceQuoteRequestRepository;
+import com.lakesidemutual.customerselfservice.infrastructure.CustomerSelfServiceInsuranceQuoteRequestRepository;
 import com.lakesidemutual.customerselfservice.infrastructure.UserLoginRepository;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.customer.AddressDto;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.customer.CustomerDto;
@@ -56,7 +56,7 @@ public class CustomerInformationHolder {
 	private UserLoginRepository userLoginRepository;
 
 	@Autowired
-	private InsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
+	private CustomerSelfServiceInsuranceQuoteRequestRepository insuranceQuoteRequestRepository;
 
 	@Autowired
 	private CustomerCoreClient customerCoreClient;

@@ -11,7 +11,7 @@ spring:
   config:
     import:
       - optional:classpath:application-customerselfservice.properties
-      - optional:classpath:application-policymanagementservice.properties
+      - optional:classpath:application-policymanagement.properties
   # ✅ One datasource definition only (avoid conflicts with imported properties)
   datasource:
     url: jdbc:h2:file:./customerselfservice
