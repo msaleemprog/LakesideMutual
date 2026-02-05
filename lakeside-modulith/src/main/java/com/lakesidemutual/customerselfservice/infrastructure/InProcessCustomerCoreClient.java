@@ -6,13 +6,16 @@ import com.lakesidemutual.customerselfservice.interfaces.dtos.customer.AddressDt
 import com.lakesidemutual.customerselfservice.interfaces.dtos.customer.CustomerDto;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.customer.CustomerProfileDto;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.customer.CustomerProfileUpdateRequestDto;
+
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Profile("customerselfservice")
+@Profile({"customerselfservice-customers", "customerselfservice-cities"})
+@Primary
 @Component
 public class InProcessCustomerCoreClient implements CustomerCoreClient {
 
