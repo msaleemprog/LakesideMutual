@@ -12,6 +12,7 @@ com\lakesidemutual\customercore\interfaces\validation\PhoneNumberValidator.class
 com\lakesidemutual\policymanagement\interfaces\dtos\customer\CustomerNotFoundException.class
 com\lakesidemutual\policymanagement\interfaces\dtos\policy\MoneyAmountDto.class
 com\lakesidemutual\policymanagement\domain\policy\PolicyAggregateRoot.class
+com\lakesidemutual\customerselfservice\api\PolicyCreated.class
 com\lakesidemutual\customercore\api\dto\CustomerResponseDto.class
 com\lakesidemutual\customerselfservice\domain\insurancequoterequest\InsuranceQuoteResponseEvent.class
 com\lakesidemutual\customerselfservice\domain\insurancequoterequest\RequestStatus.class
@@ -23,6 +24,7 @@ com\lakesidemutual\customerselfservice\interfaces\configuration\DefaultAuthentic
 com\lakesidemutual\customerselfservice\interfaces\InsuranceQuoteResponseMessageConsumer.class
 com\lakesidemutual\customerselfservice\interfaces\dtos\city\CitiesResponseDto.class
 com\lakesidemutual\customerselfservice\interfaces\configuration\SwaggerConfiguration.class
+com\lakesidemutual\customerselfservice\infrastructure\PolicyManagementEventListener.class
 com\lakesidemutual\customercore\domain\city\CityLookupService.class
 com\lakesidemutual\policymanagement\PolicyManagementModule.class
 com\lakesidemutual\customercore\interfaces\dtos\customer\CustomerProfileUpdateRequestDto.class
@@ -101,6 +103,7 @@ com\lakesidemutual\config\MigrationSecurityConfiguration.class
 com\lakesidemutual\policymanagement\interfaces\dtos\insurancequoterequest\InsuranceQuoteRequestNotFoundException.class
 com\lakesidemutual\customercore\interfaces\ErrorController.class
 com\lakesidemutual\customerselfservice\domain\insurancequoterequest\InsuranceQuoteEntity.class
+com\lakesidemutual\policymanagement\interfaces\InsuranceQuoteRequestCoordinator.class
 com\lakesidemutual\customerselfservice\infrastructure\PolicyManagementMessageProducer.class
 com\lakesidemutual\policymanagement\interfaces\configuration\logging\RequestTracingFilter.class
 com\lakesidemutual\customercore\api\package-info.class
@@ -179,6 +182,7 @@ com\lakesidemutual\policymanagement\interfaces\InsuranceQuoteRequestMessageConsu
 com\lakesidemutual\customerselfservice\interfaces\dtos\customer\CustomerNotFoundException.class
 com\lakesidemutual\customerselfservice\domain\identityaccess\UserLoginEntity.class
 com\lakesidemutual\customerselfservice\interfaces\validation\PhoneNumberValidator.class
+com\lakesidemutual\customerselfservice\api\InsuranceQuoteResponded.class
 com\lakesidemutual\customercore\domain\customer\CustomerProfileEntity.class
 com\lakesidemutual\policymanagement\application\ExpirationCheckerJob.class
 com\lakesidemutual\policymanagement\interfaces\dtos\CustomerCoreNotAvailableException.class

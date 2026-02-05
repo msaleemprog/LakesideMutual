@@ -51,8 +51,10 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\api\CustomerInfo.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\api\InsuranceOptions.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\api\InsuranceQuoteRequestSubmitted.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\api\InsuranceQuoteResponded.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\api\Money.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\api\package-info.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\api\PolicyCreated.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\application\DataLoader.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\domain\customer\Address.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\domain\customer\CustomerId.java
@@ -78,6 +80,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\infrastructure\CustomerCoreServiceMBean.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\infrastructure\CustomerSelfServiceInsuranceQuoteRequestRepository.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\infrastructure\InProcessCustomerCoreClient.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\infrastructure\PolicyManagementEventListener.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\infrastructure\PolicyManagementMessageProducer.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\infrastructure\UserLoginRepository.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\AuthenticationController.java
@@ -199,6 +202,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\dtos\risk\RiskFactorRequestDto.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\dtos\risk\RiskFactorResponseDto.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\dtos\UnknownCustomerException.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\InsuranceQuoteRequestCoordinator.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\InsuranceQuoteRequestMessageConsumer.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\PolicyInformationHolder.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\RiskComputationService.java
