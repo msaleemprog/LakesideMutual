@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import com.lakesidemutual.policymanagement.api.CustomerDecisionSubmitted;
+import com.lakesidemutual.customerselfservice.api.CustomerDecisionSubmitted;
 import com.lakesidemutual.policymanagement.api.InsuranceQuoteRequestSubmitted;
 import com.lakesidemutual.policymanagement.api.CustomerInfo;
 import com.lakesidemutual.policymanagement.api.Address;
@@ -87,10 +87,27 @@ class CustomerSelfServiceEventListener {
         log.info("PolicyManagement created quote request {} from CustomerSelfService event.", event.requestId());
     }
 
-    @EventListener
-    void on(CustomerDecisionSubmitted event) {
-        decisionHandler.handleCustomerDecisionEvent(
-                new CustomerDecisionEvent(event.decidedAt(), event.requestId(), event.accepted())
-        );
+@EventListener
+void on(CustomerDecisionSubmitted event) {
+    log.info("PM received CustomerDecisionSubmitted: id={}, accepted={}", event.requestId(), event.accepted());
+
+    // 1) load PM projection
+    InsuranceQuoteRequestAggregateRoot pmReq = pmQuoteRepo.findById(event.requestId())
+        .orElseThrow(() -> new IllegalStateException("PM quote request not found for id " + event.requestId()));
+
+    // 2) update status history in PM
+    if (event.accepted()) {
+        pmReq.acceptQuote(event.decidedAt());     // <-- implement if missing
+    } else {
+        pmReq.rejectQuote(event.decidedAt());     // <-- implement if missing
     }
+
+    pmQuoteRepo.save(pmReq);
+
+    // 3) keep existing behavior (policy creation, etc.)
+    decisionHandler.handleCustomerDecisionEvent(
+        new CustomerDecisionEvent(event.decidedAt(), event.requestId(), event.accepted())
+    );
+}
+
 }
