@@ -7,12 +7,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import com.lakesidemutual.customerselfservice.api.CustomerDecisionSubmitted;
-import com.lakesidemutual.customerselfservice.api.InsuranceQuoteRequestSubmitted;
-import com.lakesidemutual.customerselfservice.api.CustomerInfo;
-import com.lakesidemutual.customerselfservice.api.Address;
-import com.lakesidemutual.customerselfservice.api.InsuranceOptions;
-import com.lakesidemutual.customerselfservice.api.Money;
+import com.lakesidemutual.policymanagement.api.CustomerDecisionSubmitted;
+import com.lakesidemutual.policymanagement.api.InsuranceQuoteRequestSubmitted;
+import com.lakesidemutual.policymanagement.api.CustomerInfo;
+import com.lakesidemutual.policymanagement.api.Address;
+import com.lakesidemutual.policymanagement.api.InsuranceOptions;
+import com.lakesidemutual.policymanagement.api.Money;
 
 import com.lakesidemutual.policymanagement.domain.customer.CustomerId;
 import com.lakesidemutual.policymanagement.domain.insurancequoterequest.CustomerDecisionEvent;

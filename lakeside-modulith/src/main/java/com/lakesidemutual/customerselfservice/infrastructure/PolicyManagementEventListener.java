@@ -6,8 +6,8 @@ import java.util.Date;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import com.lakesidemutual.customerselfservice.api.InsuranceQuoteResponded;
-import com.lakesidemutual.customerselfservice.api.PolicyCreated;
+import com.lakesidemutual.policymanagement.api.InsuranceQuoteResponded;
+import com.lakesidemutual.policymanagement.api.PolicyCreated;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteEntity;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteRequestAggregateRoot;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.MoneyAmount;

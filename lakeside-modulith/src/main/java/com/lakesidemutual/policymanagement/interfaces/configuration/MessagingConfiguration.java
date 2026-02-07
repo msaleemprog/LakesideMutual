@@ -27,23 +27,24 @@ import java.util.Map;
 @Profile("microservices")
 @Configuration
 public class MessagingConfiguration {
-    @Value("${policymanagement.stompBrokerBindAddress:localhost}")
-    private String stompBrokerBindAddress;
+    @Value("${policymanagement.stompConnector:stomp://0.0.0.0:61613}")
+    private String stompConnector;
 
-    @Value("${policymanagement.tcpBrokerBindAddress:localhost}")
-    private String tcpBrokerBindAddress;
+    @Value("${policymanagement.tcpConnector:tcp://0.0.0.0:61616}")
+    private String tcpConnector;
 
-    @Value("${spring.activemq.user:localhost}")
+    @Value("${spring.activemq.user:queueuser}")
     private String username;
 
-    @Value("${spring.activemq.password:localhost}")
+    @Value("${spring.activemq.password:secret}")
     private String password;
+
 
     @Bean
     public BrokerService broker() throws Exception {
         final BrokerService broker = new BrokerService();
-        broker.addConnector(stompBrokerBindAddress);
-        broker.addConnector(tcpBrokerBindAddress);
+        broker.addConnector(stompConnector);
+        broker.addConnector(tcpConnector);
         broker.setPersistent(true);
         broker.setUseJmx(true);
 

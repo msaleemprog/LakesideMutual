@@ -1,3 +1,4 @@
+com\lakesidemutual\policymanagement\api\InsuranceOptions.class
 com\lakesidemutual\policymanagement\interfaces\dtos\policy\PaginatedPolicyResponseDto.class
 com\lakesidemutual\policymanagement\interfaces\configuration\MessagingConfiguration.class
 com\lakesidemutual\customercore\interfaces\OldCustomerInformationHolder.class
@@ -5,6 +6,9 @@ com\lakesidemutual\customercore\api\dto\AddressDto.class
 com\lakesidemutual\customerselfservice\domain\insurancequoterequest\MoneyAmount.class
 com\lakesidemutual\customercore\domain\customer\package-info.class
 com\lakesidemutual\customercore\interfaces\CustomerInformationHolder.class
+com\lakesidemutual\customerselfservice\CustomerSelfServiceModule.class
+com\lakesidemutual\policymanagement\api\Address.class
+com\lakesidemutual\policymanagement\api\CustomerDecisionSubmitted.class
 com\lakesidemutual\policymanagement\interfaces\dtos\policy\PolicyDto.class
 com\lakesidemutual\policymanagement\domain\policy\MoneyAmount.class
 com\lakesidemutual\customerselfservice\interfaces\configuration\RateLimitInterceptor.class
@@ -12,8 +16,8 @@ com\lakesidemutual\customercore\interfaces\validation\PhoneNumberValidator.class
 com\lakesidemutual\policymanagement\interfaces\dtos\customer\CustomerNotFoundException.class
 com\lakesidemutual\policymanagement\interfaces\dtos\policy\MoneyAmountDto.class
 com\lakesidemutual\policymanagement\domain\policy\PolicyAggregateRoot.class
-com\lakesidemutual\customerselfservice\api\PolicyCreated.class
 com\lakesidemutual\customercore\api\dto\CustomerResponseDto.class
+com\lakesidemutual\policymanagement\api\package-info.class
 com\lakesidemutual\customerselfservice\domain\insurancequoterequest\InsuranceQuoteResponseEvent.class
 com\lakesidemutual\customerselfservice\domain\insurancequoterequest\RequestStatus.class
 com\lakesidemutual\policymanagement\interfaces\dtos\insurancequoterequest\InsuranceQuoteResponseDto.class
@@ -66,6 +70,7 @@ com\lakesidemutual\customerselfservice\interfaces\configuration\HeaderRequestInt
 com\lakesidemutual\customercore\application\CustomerService.class
 com\lakesidemutual\customerselfservice\interfaces\converters\StringToCustomerIdConverter.class
 com\lakesidemutual\customerselfservice\domain\insurancequoterequest\CustomerDecisionEvent.class
+com\lakesidemutual\policymanagement\api\InsuranceQuoteRequestSubmitted.class
 com\lakesidemutual\customerselfservice\infrastructure\UserLoginRepository.class
 com\lakesidemutual\customerselfservice\interfaces\configuration\WebSecurityConfiguration.class
 com\lakesidemutual\customerselfservice\interfaces\dtos\customer\CustomerCoreNotAvailableException.class
@@ -99,7 +104,6 @@ com\lakesidemutual\customerselfservice\interfaces\dtos\insurancequoterequest\Ins
 com\lakesidemutual\policymanagement\domain\insurancequoterequest\InsuranceType.class
 com\lakesidemutual\customerselfservice\infrastructure\InProcessCustomerCoreClient.class
 com\lakesidemutual\policymanagement\domain\insurancequoterequest\CustomerDecisionEvent.class
-com\lakesidemutual\config\MigrationSecurityConfiguration.class
 com\lakesidemutual\policymanagement\interfaces\dtos\insurancequoterequest\InsuranceQuoteRequestNotFoundException.class
 com\lakesidemutual\customercore\interfaces\ErrorController.class
 com\lakesidemutual\customerselfservice\domain\insurancequoterequest\InsuranceQuoteEntity.class
@@ -112,6 +116,7 @@ com\lakesidemutual\policymanagement\interfaces\dtos\customer\AddressDto.class
 com\lakesidemutual\policymanagement\infrastructure\InProcessCustomerCoreClient.class
 com\lakesidemutual\policymanagement\domain\policy\InsuringAgreementItem.class
 com\lakesidemutual\policymanagement\application\ExpirationCheckerJobConfiguration.class
+com\lakesidemutual\policymanagement\api\PolicyCreated.class
 com\lakesidemutual\customercore\api\dto\CustomerProfileUpdateRequestDto.class
 com\lakesidemutual\policymanagement\interfaces\dtos\policy\PolicyPeriodDto.class
 com\lakesidemutual\customerselfservice\interfaces\dtos\customer\CustomerProfileUpdateRequestDto.class
@@ -121,6 +126,7 @@ com\lakesidemutual\policymanagement\interfaces\dtos\insurancequoterequest\Insura
 com\lakesidemutual\policymanagement\infrastructure\PolicyInsuranceQuoteRequestRepository.class
 com\lakesidemutual\policymanagement\interfaces\dtos\customer\CustomerDto.class
 com\lakesidemutual\customerselfservice\infrastructure\CustomerCoreRemoteProxy.class
+com\lakesidemutual\policymanagement\api\InsuranceQuoteResponded.class
 com\lakesidemutual\policymanagement\interfaces\dtos\policy\InsuringAgreementItemDto.class
 com\lakesidemutual\policymanagement\domain\insurancequoterequest\RequestStatusChange.class
 com\lakesidemutual\policymanagement\interfaces\dtos\policy\CreatePolicyRequestDto.class
@@ -152,6 +158,7 @@ com\lakesidemutual\policymanagement\domain\policy\UpdatePolicyEvent.class
 com\lakesidemutual\policymanagement\interfaces\dtos\customer\CustomerIdDto.class
 com\lakesidemutual\customercore\interfaces\dtos\city\CitiesResponseDto.class
 com\lakesidemutual\customerselfservice\interfaces\dtos\customer\CustomerIdDto.class
+com\lakesidemutual\policymanagement\api\CustomerInfo.class
 com\lakesidemutual\policymanagement\infrastructure\CustomerSelfServiceEventListener.class
 com\lakesidemutual\customercore\domain\customer\CustomerAggregateRoot.class
 com\lakesidemutual\policymanagement\interfaces\dtos\insurancequoterequest\CustomerInfoDto.class
@@ -182,7 +189,6 @@ com\lakesidemutual\policymanagement\interfaces\InsuranceQuoteRequestMessageConsu
 com\lakesidemutual\customerselfservice\interfaces\dtos\customer\CustomerNotFoundException.class
 com\lakesidemutual\customerselfservice\domain\identityaccess\UserLoginEntity.class
 com\lakesidemutual\customerselfservice\interfaces\validation\PhoneNumberValidator.class
-com\lakesidemutual\customerselfservice\api\InsuranceQuoteResponded.class
 com\lakesidemutual\customercore\domain\customer\CustomerProfileEntity.class
 com\lakesidemutual\policymanagement\application\ExpirationCheckerJob.class
 com\lakesidemutual\policymanagement\interfaces\dtos\CustomerCoreNotAvailableException.class
@@ -192,6 +198,7 @@ com\lakesidemutual\customercore\api\CustomerCoreApi.class
 com\lakesidemutual\customerselfservice\interfaces\dtos\customer\AddressDto.class
 com\lakesidemutual\customerselfservice\domain\identityaccess\UserSecurityDetails.class
 com\lakesidemutual\policymanagement\interfaces\configuration\WebSecurityConfiguration.class
+com\lakesidemutual\policymanagement\api\Money.class
 com\lakesidemutual\customercore\interfaces\configuration\WebSecurityConfiguration.class
 com\lakesidemutual\policymanagement\domain\insurancequoterequest\InsuranceQuoteResponseEvent.class
 com\lakesidemutual\customerselfservice\domain\insurancequoterequest\PolicyCreatedEvent.class

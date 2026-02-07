@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.lakesidemutual.customerselfservice.api.InsuranceQuoteResponded;
-import com.lakesidemutual.customerselfservice.api.Money;
+import com.lakesidemutual.policymanagement.api.InsuranceQuoteResponded;
+import com.lakesidemutual.policymanagement.api.Money;
 import com.lakesidemutual.policymanagement.domain.insurancequoterequest.InsuranceQuoteEntity;
 import com.lakesidemutual.policymanagement.domain.insurancequoterequest.InsuranceQuoteRequestAggregateRoot;
 import com.lakesidemutual.policymanagement.domain.insurancequoterequest.RequestStatus;
@@ -32,7 +32,18 @@ public class InsuranceQuoteRequestCoordinator {
         this.events = events;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("permitAll()")
+    @GetMapping
+    public ResponseEntity<?> getAll() {
+        var list = repo.findAll()
+            .stream()
+            .map(com.lakesidemutual.policymanagement.interfaces.dtos.insurancequoterequest.InsuranceQuoteRequestDto::fromDomainObject)
+            .toList();
+
+        return ResponseEntity.ok(list);
+    }
+
+    @PreAuthorize("permitAll()")
     @GetMapping("/{id}")
     public ResponseEntity<?> get(@PathVariable Long id) {
         InsuranceQuoteRequestAggregateRoot req = repo.findById(id)
@@ -45,7 +56,7 @@ public class InsuranceQuoteRequestCoordinator {
      * It moves REQUEST_SUBMITTED -> QUOTE_RECEIVED (or REQUEST_REJECTED),
      * then publishes InsuranceQuoteResponded for CustomerSelfService.
      */
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("permitAll()")
     @PatchMapping("/{id}")
     public ResponseEntity<?> respond(@PathVariable Long id, @Valid @RequestBody InsuranceQuoteResponseDto dto) {
 

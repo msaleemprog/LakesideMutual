@@ -40,11 +40,12 @@ import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequ
 import org.springframework.context.ApplicationEventPublisher;
 
 import com.lakesidemutual.customerselfservice.api.CustomerDecisionSubmitted;
-import com.lakesidemutual.customerselfservice.api.Address;
-import com.lakesidemutual.customerselfservice.api.CustomerInfo;
-import com.lakesidemutual.customerselfservice.api.InsuranceOptions;
-import com.lakesidemutual.customerselfservice.api.InsuranceQuoteRequestSubmitted;
-import com.lakesidemutual.customerselfservice.api.Money;
+import com.lakesidemutual.policymanagement.api.InsuranceQuoteRequestSubmitted;
+import com.lakesidemutual.policymanagement.api.CustomerInfo;
+import com.lakesidemutual.policymanagement.api.Address;
+import com.lakesidemutual.policymanagement.api.InsuranceOptions;
+import com.lakesidemutual.policymanagement.api.Money;
+
 /**
  * This REST controller gives clients access to the insurance quote requests. It is an example of the
  * <i>Information Holder Resource</i> pattern. This particular one is a special type of information holder called <i>Operational Data Holder</i>.

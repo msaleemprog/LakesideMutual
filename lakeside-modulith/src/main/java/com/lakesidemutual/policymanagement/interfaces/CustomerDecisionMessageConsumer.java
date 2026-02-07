@@ -22,7 +22,8 @@ import com.lakesidemutual.policymanagement.domain.policy.PolicyType;
 import com.lakesidemutual.policymanagement.infrastructure.PolicyInsuranceQuoteRequestRepository;
 import com.lakesidemutual.policymanagement.infrastructure.PolicyRepository;
 import org.springframework.context.ApplicationEventPublisher;
-import com.lakesidemutual.customerselfservice.api.PolicyCreated;
+import com.lakesidemutual.policymanagement.api.PolicyCreated;
+
 
 /**
  * Transport-agnostic handler. Called by the Modulith event listener.
@@ -91,11 +92,13 @@ public class CustomerDecisionMessageConsumer {
                 Date policyCreationDate = new Date();
                 insuranceQuoteRequest.finalizeQuote(policy.getId().getId(), policyCreationDate);
 
-                events.publishEvent(new PolicyCreated(
-                insuranceQuoteRequest.getId(),
-                policyCreationDate,
-                policy.getId().getId()
-                ));
+events.publishEvent(new PolicyCreated(
+    insuranceQuoteRequest.getId(),
+    policy.getId().getId(),   // String
+    policyCreationDate        // Date
+));
+
+
 
                 logger.info("Policy {} created for quote request {}.",
                         policy.getId().getId(), insuranceQuoteRequest.getId());

@@ -1,1 +1,1 @@
-[{"name":"com.lakesidemutual.policymanagement.interfaces.CustomerDecisionMessageConsumer","comment":"Transport-agnostic handler. Called by the Modulith event listener. No JMS, no remote calls, no cross-module messaging."}]
+[]

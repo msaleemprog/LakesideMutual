@@ -22,12 +22,12 @@ import java.util.Arrays;
 public class WebSecurityConfiguration {
 
     @Bean
-    @Order(2) // ✅ lower priority than customer-self-service
+    @Order(1) // ✅ lower priority than customer-self-service
     public SecurityFilterChain policyManagementFilterChain(HttpSecurity http) throws Exception {
 
         http
             // ✅ critical: restrict this chain to policy endpoints only
-            .securityMatcher("/policies/**")
+            .securityMatcher("/policy-management/**")
 
             .headers(headers -> headers
                 .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)

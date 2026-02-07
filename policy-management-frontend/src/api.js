@@ -17,12 +17,12 @@ export async function getCustomer(customerId) {
 }
 
 export async function getInsuranceQuoteRequests() {
-  return getJson(`${policyManagementBackend}/insurance-quote-requests`)
+  return getJson(`${policyManagementBackend}/policy-management/insurance-quote-requests`)
 }
 
 export async function getInsuranceQuoteRequest(insuranceQuoteRequestId) {
   return getJson(
-    `${policyManagementBackend}/insurance-quote-requests/${insuranceQuoteRequestId}`
+    `${policyManagementBackend}/policy-management/insurance-quote-requests/${insuranceQuoteRequestId}`
   )
 }
 
@@ -51,7 +51,7 @@ export async function respondToInsuranceQuoteRequest(
     body = { status: 'REQUEST_REJECTED' }
   }
   return patchJson(
-    `${policyManagementBackend}/insurance-quote-requests/${insuranceQuoteRequestId}`,
+    `${policyManagementBackend}/policy-management/insurance-quote-requests/${insuranceQuoteRequestId}`,
     body
   )
 }
