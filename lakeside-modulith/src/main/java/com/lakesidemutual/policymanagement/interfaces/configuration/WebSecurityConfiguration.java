@@ -27,12 +27,7 @@ public class WebSecurityConfiguration {
 
         http
             // ✅ critical: restrict this chain to policy endpoints only
-            .securityMatcher(
-                "/policies/**",
-                "/insurance-quote-requests/**",
-                "/riskfactor/**",
-                "/policy-management/**" // keep for your current coordinator mapping
-            )
+            .securityMatcher("/policy-management/**")
 
             .headers(headers -> headers
                 .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
