@@ -1,4 +1,8 @@
 package com.lakesidemutual.customercore.api;
+import com.lakesidemutual.customercore.api.dto.CustomerProfileUpdateRequestDto;
+import com.lakesidemutual.customercore.api.dto.CustomerResponseDto;
+import com.lakesidemutual.customercore.api.dto.PaginatedCustomerResponseDto;
+import org.springframework.http.ResponseEntity;
 
 @org.springframework.modulith.NamedInterface("api")
 public interface CustomerCoreApi {
@@ -13,4 +17,16 @@ public interface CustomerCoreApi {
 
     org.springframework.http.ResponseEntity<com.lakesidemutual.customercore.api.dto.CitiesResponseDto>
     getCitiesForPostalCode(String postalCode);
+
+    ResponseEntity<PaginatedCustomerResponseDto> getCustomers(
+        String filter,
+        Integer limit,
+        Integer offset,
+        String fields
+    );
+
+    ResponseEntity<CustomerResponseDto> updateCustomer(
+        String customerId,
+        CustomerProfileUpdateRequestDto requestDto
+    );
 }
