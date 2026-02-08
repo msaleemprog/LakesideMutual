@@ -24,7 +24,7 @@ services:
     environment:
       # Browser hits modulith on your host:
       - "REACT_APP_CUSTOMER_SELF_SERVICE_BACKEND=http://localhost:8085"
-      - "REACT_APP_CUSTOMER_MANAGEMENT_BACKEND=http://localhost:8100"
+      - "REACT_APP_CUSTOMER_MANAGEMENT_BACKEND=http://localhost:8085/customer-management"
       - "REACT_APP_POLICY_MANAGEMENT_FRONTEND=http://localhost:3010"
     ports:
       - "3020:80"
@@ -48,7 +48,7 @@ services:
       # Browser hits modulith on your host:
       - "REACT_APP_CUSTOMER_SELF_SERVICE_BACKEND=http://localhost:8085"
       - "REACT_APP_POLICY_MANAGEMENT_BACKEND=http://localhost:8085"
-      - "REACT_APP_CUSTOMER_MANAGEMENT_BACKEND=http://localhost:8100"
+      - "REACT_APP_CUSTOMER_MANAGEMENT_BACKEND=http://localhost:8085/customer-management"
     ports:
       - "3000:80"
 
