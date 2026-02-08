@@ -219,6 +219,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\converters\StringToCustomerIdDtoConverter.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\converters\StringToPolicyIdConverter.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\CustomerDecisionMessageConsumer.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\CustomerPolicyInformationHolder.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\dtos\customer\AddressDto.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\dtos\customer\CustomerDto.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\dtos\customer\CustomerIdDto.java
