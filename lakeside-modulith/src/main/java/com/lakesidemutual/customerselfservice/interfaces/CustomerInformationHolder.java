@@ -70,23 +70,23 @@ public class CustomerInformationHolder {
 		return customerCoreClient.changeAddress(customerId, requestDto);
 	}
 
-	@Operation(summary = "Get customer with a given customer id.")
-	@PreAuthorize("isAuthenticated()")
-	@GetMapping(value = "/{customerId}")
-	public ResponseEntity<CustomerDto> getCustomer(
-			Authentication authentication,
-			@Parameter(description = "the customer's unique id", required = true) @PathVariable CustomerId customerId) {
+	// @Operation(summary = "Get customer with a given customer id.")
+	// @PreAuthorize("isAuthenticated()")
+	// @GetMapping(value = "/{customerId}")
+	// public ResponseEntity<CustomerDto> getCustomer(
+	// 		Authentication authentication,
+	// 		@Parameter(description = "the customer's unique id", required = true) @PathVariable CustomerId customerId) {
 
-		CustomerDto customer = customerCoreClient.getCustomer(customerId);
-		if(customer == null) {
-			final String errorMessage = "Failed to find a customer with id '" + customerId.getId() + "'.";
-			logger.info(errorMessage);
-			throw new CustomerNotFoundException(errorMessage);
-		}
+	// 	CustomerDto customer = customerCoreClient.getCustomer(customerId);
+	// 	if(customer == null) {
+	// 		final String errorMessage = "Failed to find a customer with id '" + customerId.getId() + "'.";
+	// 		logger.info(errorMessage);
+	// 		throw new CustomerNotFoundException(errorMessage);
+	// 	}
 
-		addHATEOASLinks(customer);
-		return ResponseEntity.ok(customer);
-	}
+	// 	addHATEOASLinks(customer);
+	// 	return ResponseEntity.ok(customer);
+	// }
 
 	@Operation(summary = "Complete the registration of a new customer.")
 	@PreAuthorize("isAuthenticated()")
@@ -119,15 +119,15 @@ public class CustomerInformationHolder {
 
 	private void addHATEOASLinks(CustomerDto customerDto) {
 		CustomerId customerId = new CustomerId(customerDto.getCustomerId());
-		Link selfLink = linkTo(methodOn(CustomerInformationHolder.class).getCustomer(null, customerId))
-				.withSelfRel();
+		// Link selfLink = linkTo(methodOn(CustomerInformationHolder.class).getCustomer(null, customerId))
+		// 		.withSelfRel();
 		Link updateAddressLink = linkTo(methodOn(CustomerInformationHolder.class).changeAddress(customerId, null))
 				.withRel("address.change");
 		// When getting the DTO from the proxy, it already contains links
 		// pointing to the customer-core, so we first remove them ...
 		customerDto.removeLinks();
 		// and add our own:
-		customerDto.add(selfLink);
+		//customerDto.add(selfLink);
 		customerDto.add(updateAddressLink);
 	}
 }

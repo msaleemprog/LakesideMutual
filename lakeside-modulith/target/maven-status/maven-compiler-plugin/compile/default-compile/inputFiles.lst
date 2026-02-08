@@ -57,6 +57,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\infrastructure\CustomerCoreClientConfiguration.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\infrastructure\CustomerCoreRemoteProxy.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\infrastructure\InteractionLogRepository.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\infrastructure\package-info.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\configuration\DefaultAuthenticatedRestTemplateClient.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\configuration\HeaderRequestInterceptor.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\configuration\SwaggerConfiguration.java
@@ -64,6 +65,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\configuration\WebSecurityConfiguration.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\configuration\WebSocketConfiguration.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\CustomerInformationHolder.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\CustomerManagementController.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\CustomerMessageController.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\dtos\AddressDto.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\dtos\CustomerCoreNotAvailableException.java
@@ -79,6 +81,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\ErrorController.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\InteractionLogInformationHolder.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\NotificationInformationHolder.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\package-info.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\package-info.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\api\Address.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\api\CustomerInfo.java

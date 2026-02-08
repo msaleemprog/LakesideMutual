@@ -1,1 +1,1 @@
-[{"name":"com.lakesidemutual.customerselfservice.interfaces.configuration.WebSecurityConfiguration","comment":"Configures security for Customer Self Service endpoints only. Important: This chain MUST NOT apply to /policy-management/** (handled by policy module)."}]
+[]
