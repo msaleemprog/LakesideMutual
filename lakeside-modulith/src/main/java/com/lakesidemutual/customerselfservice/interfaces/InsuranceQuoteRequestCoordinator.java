@@ -39,7 +39,7 @@ import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequ
 import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequest.InsuranceQuoteResponseDto;
 import org.springframework.context.ApplicationEventPublisher;
 
-import com.lakesidemutual.customerselfservice.api.CustomerDecisionSubmitted;
+import com.lakesidemutual.policymanagement.api.CustomerDecisionSubmitted;
 import com.lakesidemutual.policymanagement.api.InsuranceQuoteRequestSubmitted;
 import com.lakesidemutual.policymanagement.api.CustomerInfo;
 import com.lakesidemutual.policymanagement.api.Address;

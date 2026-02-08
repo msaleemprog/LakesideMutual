@@ -11,7 +11,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.ApplicationEventPublisher;
-import com.lakesidemutual.customerselfservice.api.CustomerDecisionSubmitted;
+import com.lakesidemutual.policymanagement.api.CustomerDecisionSubmitted;
 
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.CustomerDecisionEvent;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteRequestEvent;

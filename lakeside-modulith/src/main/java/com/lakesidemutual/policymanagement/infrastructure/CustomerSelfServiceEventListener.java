@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import com.lakesidemutual.customerselfservice.api.CustomerDecisionSubmitted;
+import com.lakesidemutual.policymanagement.api.CustomerDecisionSubmitted;
 import com.lakesidemutual.policymanagement.api.InsuranceQuoteRequestSubmitted;
 import com.lakesidemutual.policymanagement.api.CustomerInfo;
 import com.lakesidemutual.policymanagement.api.Address;

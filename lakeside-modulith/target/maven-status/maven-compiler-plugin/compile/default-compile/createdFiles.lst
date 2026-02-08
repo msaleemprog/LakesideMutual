@@ -131,7 +131,6 @@ com\lakesidemutual\policymanagement\interfaces\dtos\policy\InsuringAgreementItem
 com\lakesidemutual\policymanagement\domain\insurancequoterequest\RequestStatusChange.class
 com\lakesidemutual\policymanagement\interfaces\dtos\policy\CreatePolicyRequestDto.class
 com\lakesidemutual\customerselfservice\interfaces\configuration\CustomerSelfServiceMigrationSecurityConfig.class
-com\lakesidemutual\customerselfservice\api\CustomerDecisionSubmitted.class
 com\lakesidemutual\customercore\interfaces\dtos\customer\PaginatedCustomerResponseDto.class
 com\lakesidemutual\policymanagement\domain\insurancequoterequest\RequestStatus.class
 com\lakesidemutual\customerselfservice\interfaces\dtos\insurancequoterequest\InsuranceQuoteRequestDto.class
