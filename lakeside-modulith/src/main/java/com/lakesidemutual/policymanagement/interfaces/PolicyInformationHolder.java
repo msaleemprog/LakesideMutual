@@ -38,236 +38,219 @@ import com.lakesidemutual.policymanagement.domain.policy.PolicyAggregateRoot;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyId;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyPeriod;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyType;
-
 import com.lakesidemutual.policymanagement.infrastructure.PolicyRepository;
 import com.lakesidemutual.policymanagement.infrastructure.RiskManagementMessageProducer;
-
 import com.lakesidemutual.policymanagement.interfaces.dtos.customer.CustomerDto;
 import com.lakesidemutual.policymanagement.interfaces.dtos.policy.CreatePolicyRequestDto;
 import com.lakesidemutual.policymanagement.interfaces.dtos.policy.PaginatedPolicyResponseDto;
 import com.lakesidemutual.policymanagement.interfaces.dtos.policy.PolicyDto;
 import com.lakesidemutual.policymanagement.interfaces.dtos.policy.PolicyNotFoundException;
 
-/**
- * This REST controller gives clients access to the insurance policies. It is an example of the
- * <i>Information Holder Resource</i> pattern. This particular one is a special type of information holder called <i>Master Data Holder</i>.
- *
- * @see <a href="https://www.microservice-api-patterns.org/patterns/responsibility/endpointRoles/InformationHolderResource">Information Holder Resource</a>
- * @see <a href="https://www.microservice-api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/MasterDataHolder">Master Data Holder</a>
- */
 @RestController
 @RequestMapping("/policies")
 public class PolicyInformationHolder {
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private PolicyRepository policyRepository;
+  private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private RiskManagementMessageProducer riskManagementMessageProducer;
+  @Autowired
+  private PolicyRepository policyRepository;
 
-	@Operation(summary = "Create a new policy.")
-	@PostMapping
-	public ResponseEntity<PolicyDto> createPolicy(
-			@Parameter(description = "the policy that is to be added", required = true)
-			@Valid
-			@RequestBody
-			CreatePolicyRequestDto createPolicyDto,
-			HttpServletRequest request) {
-		String customerIdString = createPolicyDto.getCustomerId();
-		logger.info("Creating a new policy for customer with id '{}'", customerIdString);
-		CustomerId customerId = new CustomerId(customerIdString);
-		
+  @Autowired
+  private RiskManagementMessageProducer riskManagementMessageProducer;
 
-		PolicyId id = PolicyId.random();
-		PolicyType policyType = new PolicyType(createPolicyDto.getPolicyType());
-		PolicyPeriod policyPeriod = createPolicyDto.getPolicyPeriod().toDomainObject();
-		MoneyAmount deductible = createPolicyDto.getDeductible().toDomainObject();
-		MoneyAmount policyLimit = createPolicyDto.getPolicyLimit().toDomainObject();
-		MoneyAmount insurancePremium = createPolicyDto.getInsurancePremium().toDomainObject();
-		InsuringAgreementEntity insuringAgreement = createPolicyDto.getInsuringAgreement().toDomainObject();
-		PolicyAggregateRoot policy = new PolicyAggregateRoot(id, customerId, new Date(), policyPeriod, policyType, deductible, policyLimit, insurancePremium, insuringAgreement);
-		policyRepository.save(policy);
+  @Operation(summary = "Create a new policy.")
+  @PostMapping
+  public ResponseEntity<PolicyDto> createPolicy(
+      @Parameter(description = "the policy that is to be added", required = true)
+      @Valid
+      @RequestBody
+      CreatePolicyRequestDto createPolicyDto,
+      HttpServletRequest request) {
 
-		
-		PolicyDto policyDto = createPolicyDtos(Arrays.asList(policy), "").get(0);
+    String customerIdString = createPolicyDto.getCustomerId();
+    logger.info("Creating a new policy for customer with id '{}'", customerIdString);
+    CustomerId customerId = new CustomerId(customerIdString);
 
-		return ResponseEntity.ok(policyDto);
-	}
+    PolicyId id = PolicyId.random();
+    PolicyType policyType = new PolicyType(createPolicyDto.getPolicyType());
+    PolicyPeriod policyPeriod = createPolicyDto.getPolicyPeriod().toDomainObject();
+    MoneyAmount deductible = createPolicyDto.getDeductible().toDomainObject();
+    MoneyAmount policyLimit = createPolicyDto.getPolicyLimit().toDomainObject();
+    MoneyAmount insurancePremium = createPolicyDto.getInsurancePremium().toDomainObject();
+    InsuringAgreementEntity insuringAgreement = createPolicyDto.getInsuringAgreement().toDomainObject();
 
-	@Operation(summary = "Update an existing policy.")
-	@PutMapping(value = "/{policyId}")
-	public ResponseEntity<PolicyDto> updatePolicy(
-			@Parameter(description = "the policy's unique id", required = true) @PathVariable PolicyId policyId,
-			@Parameter(description = "the updated policy", required = true) @Valid @RequestBody CreatePolicyRequestDto createPolicyDto,
-			HttpServletRequest request) {
-		logger.info("Updating policy with id '{}'", policyId.getId());
+    PolicyAggregateRoot policy = new PolicyAggregateRoot(
+        id, customerId, new Date(), policyPeriod, policyType,
+        deductible, policyLimit, insurancePremium, insuringAgreement);
 
-		Optional<PolicyAggregateRoot> optPolicy = policyRepository.findById(policyId);
-		if(!optPolicy.isPresent()) {
-			final String errorMessage = "Failed to find a policy with id '{}'";
-			logger.warn(errorMessage, policyId.getId());
-			throw new PolicyNotFoundException(errorMessage);
-		}
+    policyRepository.save(policy);
 
-		CustomerId customerId = new CustomerId(createPolicyDto.getCustomerId());
+    PolicyDto policyDto = createPolicyDtos(Arrays.asList(policy), "").get(0);
+    // helpful link
+    policyDto.add(linkTo(methodOn(PolicyInformationHolder.class).getPolicy(id, "")).withSelfRel());
+    policyDto.add(org.springframework.hateoas.Link.of("/customers/" + policyDto.getCustomerId()).withRel("customer"));
 
+    return ResponseEntity.ok(policyDto);
+  }
 
-		PolicyType policyType = new PolicyType(createPolicyDto.getPolicyType());
-		PolicyPeriod policyPeriod = createPolicyDto.getPolicyPeriod().toDomainObject();
-		MoneyAmount deductible = createPolicyDto.getDeductible().toDomainObject();
-		MoneyAmount policyLimit = createPolicyDto.getPolicyLimit().toDomainObject();
-		MoneyAmount insurancePremium = createPolicyDto.getInsurancePremium().toDomainObject();
-		InsuringAgreementEntity insuringAgreement = createPolicyDto.getInsuringAgreement().toDomainObject();
+  @Operation(summary = "Update an existing policy.")
+  @PutMapping(value = "/{policyId}")
+  public ResponseEntity<PolicyDto> updatePolicy(
+      @Parameter(description = "the policy's unique id", required = true) @PathVariable PolicyId policyId,
+      @Parameter(description = "the updated policy", required = true) @Valid @RequestBody CreatePolicyRequestDto createPolicyDto,
+      HttpServletRequest request) {
 
-		PolicyAggregateRoot policy = optPolicy.get();
-		policy.setPolicyPeriod(policyPeriod);
-		policy.setPolicyType(policyType);
-		policy.setDeductible(deductible);
-		policy.setPolicyLimit(policyLimit);
-		policy.setInsurancePremium(insurancePremium);
-		policy.setInsuringAgreement(insuringAgreement);
-		policyRepository.save(policy);
+    logger.info("Updating policy with id '{}'", policyId.getId());
 
+    Optional<PolicyAggregateRoot> optPolicy = policyRepository.findById(policyId);
+    if (!optPolicy.isPresent()) {
+      final String errorMessage = "Failed to find a policy with id '{}'";
+      logger.warn(errorMessage, policyId.getId());
+      throw new PolicyNotFoundException(errorMessage);
+    }
 
-		PolicyDto policyDto = createPolicyDtos(Arrays.asList(policy), "").get(0);
+    PolicyType policyType = new PolicyType(createPolicyDto.getPolicyType());
+    PolicyPeriod policyPeriod = createPolicyDto.getPolicyPeriod().toDomainObject();
+    MoneyAmount deductible = createPolicyDto.getDeductible().toDomainObject();
+    MoneyAmount policyLimit = createPolicyDto.getPolicyLimit().toDomainObject();
+    MoneyAmount insurancePremium = createPolicyDto.getInsurancePremium().toDomainObject();
+    InsuringAgreementEntity insuringAgreement = createPolicyDto.getInsuringAgreement().toDomainObject();
 
+    PolicyAggregateRoot policy = optPolicy.get();
+    policy.setPolicyPeriod(policyPeriod);
+    policy.setPolicyType(policyType);
+    policy.setDeductible(deductible);
+    policy.setPolicyLimit(policyLimit);
+    policy.setInsurancePremium(insurancePremium);
+    policy.setInsuringAgreement(insuringAgreement);
 
-		PolicyDto response = createPolicyDtos(Arrays.asList(policy), "").get(0);
-		return ResponseEntity.ok(response);
-	}
+    policyRepository.save(policy);
 
-	@Operation(summary = "Delete an existing policy.")
-	@DeleteMapping(value = "/{policyId}")
-	public ResponseEntity<Void> deletePolicy(
-			@Parameter(description = "the policy's unique id", required = true) @PathVariable PolicyId policyId,
-			HttpServletRequest request) {
-		logger.info("Deleting policy with id '{}'", policyId.getId());
-		policyRepository.deleteById(policyId);
+    PolicyDto response = createPolicyDtos(Arrays.asList(policy), "").get(0);
+    response.add(linkTo(methodOn(PolicyInformationHolder.class).getPolicy(policyId, "")).withSelfRel());
+    response.add(org.springframework.hateoas.Link.of("/customers/" + response.getCustomerId()).withRel("customer"));
 
-		final DeletePolicyEvent event = new DeletePolicyEvent(request.getRemoteAddr(), new Date(), policyId.getId());
-		riskManagementMessageProducer.emitEvent(event);
+    return ResponseEntity.ok(response);
+  }
 
-		return ResponseEntity.noContent().build();
-	}
+  @Operation(summary = "Delete an existing policy.")
+  @DeleteMapping(value = "/{policyId}")
+  public ResponseEntity<Void> deletePolicy(
+      @Parameter(description = "the policy's unique id", required = true) @PathVariable PolicyId policyId,
+      HttpServletRequest request) {
 
-	private List<PolicyDto> createPolicyDtos(List<PolicyAggregateRoot> policies, String expand) {
-		List<CustomerDto> customers = null;
-		if(expand.equals("customer")) {
-			List<CustomerId> customerIds = policies.stream().map(p -> p.getCustomerId()).collect(Collectors.toList());
-			
-		}
+    logger.info("Deleting policy with id '{}'", policyId.getId());
+    policyRepository.deleteById(policyId);
 
-		List<PolicyDto> policyDtos = new ArrayList<>();
-		for(int i = 0; i < policies.size(); i++) {
-			PolicyAggregateRoot policy = policies.get(i);
-			PolicyDto policyDto = PolicyDto.fromDomainObject(policy);
-			if(customers != null) {
-				CustomerDto customer = customers.get(i);
-				policyDto.setCustomer(customer);
-			}
-			policyDtos.add(policyDto);
-		}
-		return policyDtos;
-	}
+    final DeletePolicyEvent event = new DeletePolicyEvent(request.getRemoteAddr(), new Date(), policyId.getId());
+    riskManagementMessageProducer.emitEvent(event);
 
-	private PaginatedPolicyResponseDto createPaginatedPolicyResponseDto(Integer limit, Integer offset, String expand, int size,
-			List<PolicyDto> policyDtos) {
+    return ResponseEntity.noContent().build();
+  }
 
-		PaginatedPolicyResponseDto paginatedPolicyResponseDto = new PaginatedPolicyResponseDto(limit, offset,
-				size, policyDtos);
+  /**
+   * Option A expansion:
+   * - default: PolicyDto.customer is a String (customerId)
+   * - expand=customer: PolicyDto.customer becomes a CustomerDto (object) with at least customerId set
+   */
+  private List<PolicyDto> createPolicyDtos(List<PolicyAggregateRoot> policies, String expand) {
 
-		paginatedPolicyResponseDto.add(linkTo(methodOn(PolicyInformationHolder.class).getPolicies(limit, offset, expand)).withSelfRel());
+    List<PolicyDto> policyDtos = new ArrayList<>();
 
-		if (offset > 0) {
-			paginatedPolicyResponseDto.add(linkTo(
-					methodOn(PolicyInformationHolder.class).getPolicies(limit, Math.max(0, offset - limit), expand))
-					.withRel("prev"));
-		}
+    boolean expandCustomer = "customer".equals(expand);
 
-		if (offset < size - limit) {
-			paginatedPolicyResponseDto.add(linkTo(methodOn(PolicyInformationHolder.class).getPolicies(limit, offset + limit, expand))
-					.withRel("next"));
-		}
+    for (PolicyAggregateRoot policy : policies) {
 
-		return paginatedPolicyResponseDto;
-	}
+      PolicyDto policyDto = PolicyDto.fromDomainObject(policy);
 
-	@Operation(summary = "Get all policies, newest first.")
-	@GetMapping
-	public ResponseEntity<PaginatedPolicyResponseDto> getPolicies(
-			@Parameter(description = "the maximum number of policies per page", required = false) @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit,
-			@Parameter(description = "the offset of the page's first policy", required = false) @RequestParam(value = "offset", required = false, defaultValue = "0") Integer offset,
-			@Parameter(description = "a comma-separated list of the fields that should be expanded in the response", required = false) @RequestParam(value = "expand", required = false, defaultValue = "") String expand) {
-		logger.debug("Fetching a page of policies (offset={},limit={},fields='{}')", offset, limit, expand);
-		List<PolicyAggregateRoot> allPolicies = policyRepository.findAll(Sort.by(Sort.Direction.DESC, PolicyAggregateRoot.FIELD_CREATION_DATE));
-		List<PolicyAggregateRoot> policies = allPolicies.stream().skip(offset).limit(limit).collect(Collectors.toList());
-		List<PolicyDto> policyDtos = createPolicyDtos(policies, expand);
-		PaginatedPolicyResponseDto paginatedPolicyResponse = createPaginatedPolicyResponseDto(limit, offset, expand, allPolicies.size(), policyDtos);
-		return ResponseEntity.ok(paginatedPolicyResponse);
-	}
+      // Add stable customer link (use customerId extracted from PolicyDto)
+      policyDto.add(org.springframework.hateoas.Link.of("/customers/" + policyDto.getCustomerId()).withRel("customer"));
 
-	/**
-	 * Returns the policy for the given policy id.
-	 * <br><br>
-	 * The query parameter {@code expand } allows clients to provide a so-called <a href="https://www.microservice-api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a>.
-	 * By default, getPolicy() returns the following response:
-	 * <pre>
-	 *   <code>
-	 * GET http://localhost:8090/policies/h3riovf4xq/
-	 *
-	 * {
-	 *   "_expandable" : [ "customer" ],
-	 *   "policyId" : "h3riovf4xq",
-	 *   "customer" : "rgpp0wkpec",
-	 *   "creationDate" : "2018-06-19T12:45:46.743+0000",
-	 *   ...
-	 * }
-	 *   </code>
-	 * </pre>
-	 *
-	 * The response includes only the customer's id. The {@code _expandable } section indicates that the {@code customer } resource can be expanded:
-	 *
-	 * <pre>
-	 *   <code>
-	 * GET http://localhost:8090/policies/h3riovf4xq/?expand=customer
-	 *
-	 * {
-	 *   "_expandable" : [ "customer" ],
-	 *   "policyId" : "h3riovf4xq",
-	 *   "customer" : {
-	 *     "customerId" : "rgpp0wkpec",
-	 *     "customerProfile" : {
-	 *       "firstname" : "Max",
-	 *       "lastname" : "Mustermann",
-	 *       ...
-	 *     },
-	 *     ...
-	 *   },
-	 *   "creationDate" : "2018-06-19T12:45:46.743+0000",
-	 *   ...
-	 * }
-	 *   </code>
-	 * </pre>
-	 *
-	 * @see <a href=
-	 *      "https://www.microservice-api-patterns.org/patterns/quality/dataTransferParsimony/WishList">https://www.microservice-api-patterns.org/patterns/quality/dataTransferParsimony/WishList</a>
-	 */
-	@Operation(summary = "Get a single policy.")
-	@GetMapping(value = "/{policyId}")
-	public ResponseEntity<PolicyDto> getPolicy(
-			@Parameter(description = "the policy's unique id", required = true) @PathVariable PolicyId policyId,
-			@Parameter(description = "a comma-separated list of the fields that should be expanded in the response", required = false) @RequestParam(value = "expand", required = false, defaultValue = "") String expand) {
-		logger.debug("Fetching policy with id '{}'", policyId.getId());
-		Optional<PolicyAggregateRoot> optPolicy = policyRepository.findById(policyId);
-		if(!optPolicy.isPresent()) {
-			final String errorMessage = "Failed to find a policy with id '{}'";
-			logger.warn(errorMessage, policyId.getId());
-			throw new PolicyNotFoundException(errorMessage);
-		}
+      // Minimal expansion to satisfy frontend route building:
+      // policy.customer.customerId must exist when expand=customer
+      if (expandCustomer) {
+        CustomerDto minimal = new CustomerDto();
+        minimal.setCustomerId(policy.getCustomerId().getId());
+        policyDto.setCustomer(minimal);
+      }
 
-		PolicyAggregateRoot policy = optPolicy.get();
-		PolicyDto response = createPolicyDtos(Arrays.asList(policy), expand).get(0);
-		return ResponseEntity.ok(response);
-	}
+      policyDtos.add(policyDto);
+    }
+
+    return policyDtos;
+  }
+
+  private PaginatedPolicyResponseDto createPaginatedPolicyResponseDto(
+      Integer limit, Integer offset, String expand, int size, List<PolicyDto> policyDtos) {
+
+    PaginatedPolicyResponseDto paginatedPolicyResponseDto =
+        new PaginatedPolicyResponseDto(limit, offset, size, policyDtos);
+
+    paginatedPolicyResponseDto.add(
+        linkTo(methodOn(PolicyInformationHolder.class).getPolicies(limit, offset, expand)).withSelfRel());
+
+    if (offset > 0) {
+      paginatedPolicyResponseDto.add(linkTo(
+          methodOn(PolicyInformationHolder.class).getPolicies(limit, Math.max(0, offset - limit), expand))
+          .withRel("prev"));
+    }
+
+    if (offset < size - limit) {
+      paginatedPolicyResponseDto.add(
+          linkTo(methodOn(PolicyInformationHolder.class).getPolicies(limit, offset + limit, expand))
+              .withRel("next"));
+    }
+
+    return paginatedPolicyResponseDto;
+  }
+
+  @Operation(summary = "Get all policies, newest first.")
+  @GetMapping
+  public ResponseEntity<PaginatedPolicyResponseDto> getPolicies(
+      @Parameter(description = "the maximum number of policies per page", required = false)
+      @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit,
+      @Parameter(description = "the offset of the page's first policy", required = false)
+      @RequestParam(value = "offset", required = false, defaultValue = "0") Integer offset,
+      @Parameter(description = "a comma-separated list of the fields that should be expanded in the response", required = false)
+      @RequestParam(value = "expand", required = false, defaultValue = "") String expand) {
+
+    logger.debug("Fetching a page of policies (offset={},limit={},fields='{}')", offset, limit, expand);
+
+    List<PolicyAggregateRoot> allPolicies = policyRepository.findAll(
+        Sort.by(Sort.Direction.DESC, PolicyAggregateRoot.FIELD_CREATION_DATE));
+
+    List<PolicyAggregateRoot> policies = allPolicies.stream().skip(offset).limit(limit).collect(Collectors.toList());
+
+    List<PolicyDto> policyDtos = createPolicyDtos(policies, expand);
+
+    PaginatedPolicyResponseDto paginatedPolicyResponse =
+        createPaginatedPolicyResponseDto(limit, offset, expand, allPolicies.size(), policyDtos);
+
+    return ResponseEntity.ok(paginatedPolicyResponse);
+  }
+
+  @Operation(summary = "Get a single policy.")
+  @GetMapping(value = "/{policyId}")
+  public ResponseEntity<PolicyDto> getPolicy(
+      @Parameter(description = "the policy's unique id", required = true) @PathVariable PolicyId policyId,
+      @Parameter(description = "a comma-separated list of the fields that should be expanded in the response", required = false)
+      @RequestParam(value = "expand", required = false, defaultValue = "") String expand) {
+
+    logger.debug("Fetching policy with id '{}'", policyId.getId());
+
+    Optional<PolicyAggregateRoot> optPolicy = policyRepository.findById(policyId);
+    if (!optPolicy.isPresent()) {
+      final String errorMessage = "Failed to find a policy with id '{}'";
+      logger.warn(errorMessage, policyId.getId());
+      throw new PolicyNotFoundException(errorMessage);
+    }
+
+    PolicyAggregateRoot policy = optPolicy.get();
+    PolicyDto response = createPolicyDtos(Arrays.asList(policy), expand).get(0);
+
+    // also add self link
+    response.add(linkTo(methodOn(PolicyInformationHolder.class).getPolicy(policyId, expand)).withSelfRel());
+
+    return ResponseEntity.ok(response);
+  }
 }

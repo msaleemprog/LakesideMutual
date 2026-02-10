@@ -6,6 +6,8 @@ import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyAggregateRoot;
+import com.lakesidemutual.policymanagement.interfaces.dtos.customer.CustomerDto;
+import java.util.Map;
 
 /**
  * The PolicyDto class is a data transfer object (DTO) that represents a single insurance policy.
@@ -145,4 +147,19 @@ public class PolicyDto extends RepresentationModel {
 	public void setExpandable(String[] expandable) {
 		this.expandable = expandable;
 	}
+	@JsonProperty("customerId")
+public String getCustomerId() {
+  if (customer == null) return null;
+
+  if (customer instanceof String s) return s;
+
+  if (customer instanceof CustomerDto c) return c.getCustomerId();
+
+  if (customer instanceof Map<?, ?> m) {
+    Object id = m.get("customerId");
+    if (id != null) return String.valueOf(id);
+  }
+
+  return null;
+}
 }
