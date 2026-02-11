@@ -13,7 +13,7 @@ import org.microserviceapipatterns.domaindrivendesign.RootEntity;
  * no class for the Customer aggregate, so the package can be seen as aggregate.
  */
 @Entity
-@Table(name = "customers")
+@Table(name = "customers", schema = "CUSTOMERCORE")
 public class CustomerAggregateRoot implements RootEntity {
 
 	@EmbeddedId

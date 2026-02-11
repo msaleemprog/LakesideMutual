@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -20,7 +22,7 @@ import org.microserviceapipatterns.domaindrivendesign.RootEntity;
  * no class for the Insurance Quote Request aggregate, so the package can be seen as aggregate.
  */
 @Entity
-@Table(name = "insurancequoterequests")
+@Table(name = "insurancequoterequests", schema = "CUSTOMERSELFSERVICE")
 public class InsuranceQuoteRequestAggregateRoot implements RootEntity {
 	@Id
 	@GeneratedValue
@@ -29,6 +31,12 @@ public class InsuranceQuoteRequestAggregateRoot implements RootEntity {
 	private Date date;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(
+    	name = "INSURANCEQUOTEREQUESTS_STATUS_HISTORY",
+    	schema = "CUSTOMERSELFSERVICE",
+    	joinColumns = @JoinColumn(name = "INSURANCE_QUOTE_REQUEST_AGGREGATE_ROOT_ID"),
+    	inverseJoinColumns = @JoinColumn(name = "STATUS_HISTORY_ID")
+	)
 	private List<RequestStatusChange> statusHistory;
 
 	@OneToOne(cascade = CascadeType.ALL)

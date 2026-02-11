@@ -19,7 +19,7 @@ import com.lakesidemutual.customerselfservice.domain.customer.CustomerId;
  * and contains infos about the initiator of the request.
  */
 @Entity
-@Table(name = "customerinfos")
+@Table(name = "customerinfos", schema = "CUSTOMERSELFSERVICE")
 public class CustomerInfoEntity implements org.microserviceapipatterns.domaindrivendesign.Entity {
 	@GeneratedValue
 	@Id

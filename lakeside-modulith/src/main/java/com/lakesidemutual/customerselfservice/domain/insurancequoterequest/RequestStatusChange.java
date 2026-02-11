@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 import org.microserviceapipatterns.domaindrivendesign.ValueObject;
 
 @Entity
-@Table(name = "requeststatuschanges")
+@Table(name = "requeststatuschanges", schema = "CUSTOMERSELFSERVICE")
 public class RequestStatusChange implements ValueObject {
 
 	@Id

@@ -8,6 +8,8 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -18,7 +20,7 @@ import org.microserviceapipatterns.domaindrivendesign.RootEntity;
  * no class for the InteractionLog aggregate, so the package can be seen as aggregate.
  */
 @Entity
-@Table(name = "interactionlogs")
+@Table(name = "interactionlogs", schema = "CUSTOMERMANAGEMENT")
 public class InteractionLogAggregateRoot implements RootEntity {
 	@Id
 	private String customerId;
@@ -28,6 +30,12 @@ public class InteractionLogAggregateRoot implements RootEntity {
 	private String lastAcknowledgedInteractionId;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(
+    	name = "INTERACTIONLOGS_INTERACTIONS",
+    	schema = "CUSTOMERMANAGEMENT",
+    	joinColumns = @JoinColumn(name = "INTERACTIONLOGAGGREGATEROOT_CUSTOMER_ID"),
+    	inverseJoinColumns = @JoinColumn(name = "INTERACTIONS_ID")
+	)
 	private final Collection<InteractionEntity> interactions;
 
 	public InteractionLogAggregateRoot() {

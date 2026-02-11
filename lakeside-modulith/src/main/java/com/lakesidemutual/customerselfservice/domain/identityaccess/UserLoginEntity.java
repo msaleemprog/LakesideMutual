@@ -15,7 +15,7 @@ import com.lakesidemutual.customerselfservice.domain.customer.CustomerId;
  * UserLogin is an entity that contains the login credentials of a specific user.
  */
 @Entity
-@Table(name = "user_logins")
+@Table(name = "user_logins", schema = "CUSTOMERSELFSERVICE")
 public class UserLoginEntity implements org.microserviceapipatterns.domaindrivendesign.Entity {
 
 	@Id

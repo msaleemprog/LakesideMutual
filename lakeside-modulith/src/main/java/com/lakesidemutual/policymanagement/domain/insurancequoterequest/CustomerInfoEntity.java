@@ -17,7 +17,7 @@ import com.lakesidemutual.policymanagement.domain.customer.CustomerId;
  * and contains infos about the initiator of the request.
  */
 @Entity(name = "PolicyManagementCustomerInfo")
-@Table(name = "pm_customerinfos")
+@Table(name = "pm_customerinfos", schema = "POLICYMANAGEMENT")
 public class CustomerInfoEntity implements org.microserviceapipatterns.domaindrivendesign.Entity {
 
     @Id

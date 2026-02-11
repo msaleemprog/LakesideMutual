@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
  * which has been submitted as a response to a specific Insurance Quote Request.
  */
 @Entity
-@Table(name = "insurancequotes")
+@Table(name = "insurancequotes", schema = "CUSTOMERSELFSERVICE")
 public class InsuranceQuoteEntity implements org.microserviceapipatterns.domaindrivendesign.Entity {
 	@GeneratedValue
 	@Id

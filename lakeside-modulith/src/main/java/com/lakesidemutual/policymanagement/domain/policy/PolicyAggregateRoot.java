@@ -33,7 +33,7 @@ import io.github.adr.embedded.MADR;
 		justification = "The relatively small size of this application does not warrant the additional complexity (yet)."
 		)
 @Entity
-@Table(name = "insurancepolicies")
+@Table(name = "insurancepolicies", schema = "POLICYMANAGEMENT")
 public class PolicyAggregateRoot implements RootEntity {
 	@EmbeddedId
 	private PolicyId id;

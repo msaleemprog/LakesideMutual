@@ -18,11 +18,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
-
+import jakarta.persistence.Table;
 /**
  * CustomerProfileEntity is an entity that contains the personal data (customer profile) of a CustomerAggregateRoot.
  */
 @Entity
+@Table(name = "customer_profile_entity", schema = "CUSTOMERCORE")
 public class CustomerProfileEntity implements Serializable, org.microserviceapipatterns.domaindrivendesign.Entity {
 
     private static final long serialVersionUID = 1L;
@@ -55,7 +56,8 @@ public class CustomerProfileEntity implements Serializable, org.microserviceapip
     @ElementCollection
     @CollectionTable(
             name = "cc_customer_move_history",
-            joinColumns = @JoinColumn(name = "customer_profile_id")
+            joinColumns = @JoinColumn(name = "customer_profile_id"),
+            schema = "CUSTOMERCORE"
     )
     @AttributeOverrides({
             @AttributeOverride(name = "street",     column = @Column(name = "street")),

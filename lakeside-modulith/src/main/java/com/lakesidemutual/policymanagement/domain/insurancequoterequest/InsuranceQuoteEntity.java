@@ -18,7 +18,7 @@ import com.lakesidemutual.policymanagement.domain.policy.MoneyAmount;
  * which has been submitted as a response to a specific Insurance Quote Request.
  */
 @Entity(name = "PolicyManagementInsuranceQuote")
-@Table(name = "pm_insurancequotes")
+@Table(name = "pm_insurancequotes", schema = "POLICYMANAGEMENT")
 public class InsuranceQuoteEntity implements org.microserviceapipatterns.domaindrivendesign.Entity {
 	@GeneratedValue
 	@Id

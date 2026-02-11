@@ -8,6 +8,8 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -16,13 +18,19 @@ import jakarta.persistence.Table;
  * customer and Lakeside Mutual. Each InsuringAgreementEntity belongs to a PolicyAggregateRoot.
  */
 @Entity
-@Table(name = "insuringagreements")
+@Table(name = "insuringagreements", schema = "POLICYMANAGEMENT")
 public class InsuringAgreementEntity implements org.microserviceapipatterns.domaindrivendesign.Entity {
 	@GeneratedValue
 	@Id
 	private Long id;
 
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+    	name = "INSURINGAGREEMENTS_AGREEMENT_ITEMS",
+    	schema = "POLICYMANAGEMENT",
+    	joinColumns = @JoinColumn(name = "INSURINGAGREEMENTENTITY_ID"),
+    	inverseJoinColumns = @JoinColumn(name = "AGREEMENTITEMS_ID")
+	)
 	private final List<InsuringAgreementItem> agreementItems;
 
 	public InsuringAgreementEntity() {

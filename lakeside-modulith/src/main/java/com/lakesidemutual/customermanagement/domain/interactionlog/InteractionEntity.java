@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
  * InteractionEntity is an entity that contains the content and metadata of a chat message.
  */
 @Entity
-@Table(name = "interactions")
+@Table(name = "interactions", schema = "CUSTOMERMANAGEMENT")
 public class InteractionEntity implements org.microserviceapipatterns.domaindrivendesign.Entity {
 	@Id
 	private String id;

@@ -21,7 +21,7 @@ import org.microserviceapipatterns.domaindrivendesign.ValueObject;
  * evolved independently.
  * */
 @Entity(name = "CustomerSelfServiceAddress")
-@Table(name = "css_customer_addresses")
+@Table(name = "css_customer_addresses", schema = "CUSTOMERSELFSERVICE")
 public class Address implements ValueObject {
 	@GeneratedValue
 	@Id

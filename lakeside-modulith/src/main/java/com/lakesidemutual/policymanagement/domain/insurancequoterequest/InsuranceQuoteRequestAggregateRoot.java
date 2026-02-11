@@ -22,7 +22,7 @@ import org.microserviceapipatterns.domaindrivendesign.RootEntity;
  * no class for the Insurance Quote Request aggregate, so the package can be seen as aggregate.
  */
 @Entity(name = "PolicyManagementInsuranceQuoteRequest")
-@Table(name = "pm_insurancequoterequests")
+@Table(name = "pm_insurancequoterequests", schema = "POLICYMANAGEMENT")
 public class InsuranceQuoteRequestAggregateRoot implements RootEntity {
 	@Id
 	private Long id;
@@ -30,7 +30,7 @@ public class InsuranceQuoteRequestAggregateRoot implements RootEntity {
 	private Date date;
 
 	@ElementCollection
-	@CollectionTable(name = "insurance_quote_request_status_history", joinColumns = @JoinColumn(name = "request_id"))
+	@CollectionTable(name = "insurance_quote_request_status_history", joinColumns = @JoinColumn(name = "request_id"), schema = "POLICYMANAGEMENT")
 	private List<RequestStatusChange> statusHistory;
 
 	@OneToOne(cascade = CascadeType.ALL)
