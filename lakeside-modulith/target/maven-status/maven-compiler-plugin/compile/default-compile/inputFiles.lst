@@ -208,6 +208,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\infrastructure\InProcessCustomerCoreClient.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\infrastructure\PolicyInsuranceQuoteRequestRepository.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\infrastructure\PolicyRepository.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\infrastructure\RiskManagementEventPublisher.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\infrastructure\RiskManagementMessageProducer.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\configuration\DefaultAuthenticatedRestTemplateClient.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\configuration\HeaderRequestInterceptor.java
@@ -252,3 +253,18 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\RiskComputationService.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\package-info.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\PolicyManagementModule.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\riskmanagement\application\PolicyEventListener.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\riskmanagement\application\RiskProjectionStore.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\riskmanagement\application\RiskProjectionSyncService.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\riskmanagement\application\RiskReportCsvService.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\riskmanagement\interfaces\grpc\RiskManagementGrpcService.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\riskmanagement\interfaces\RiskReportController.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\riskmanagement\package-info.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\target\generated-sources\protobuf\grpc-java\com\lakesidemutual\riskmanagement\grpc\RiskManagementGrpc.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\target\generated-sources\protobuf\java\com\lakesidemutual\riskmanagement\grpc\Report.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\target\generated-sources\protobuf\java\com\lakesidemutual\riskmanagement\grpc\ReportOrBuilder.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\target\generated-sources\protobuf\java\com\lakesidemutual\riskmanagement\grpc\RiskManagementProto.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\target\generated-sources\protobuf\java\com\lakesidemutual\riskmanagement\grpc\TriggerReply.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\target\generated-sources\protobuf\java\com\lakesidemutual\riskmanagement\grpc\TriggerReplyOrBuilder.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\target\generated-sources\protobuf\java\com\lakesidemutual\riskmanagement\grpc\TriggerRequest.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\target\generated-sources\protobuf\java\com\lakesidemutual\riskmanagement\grpc\TriggerRequestOrBuilder.java

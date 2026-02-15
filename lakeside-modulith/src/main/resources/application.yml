@@ -28,7 +28,7 @@ spring:
     show-sql: false
     hibernate:
       # ✅ safer for local dev; keeps schema between restarts
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         hbm2ddl.create_namespaces: true
@@ -58,4 +58,10 @@ logging:
   level:
     org.springframework.security: DEBUG
     org.springframework.security.web.FilterChainProxy: DEBUG
+
+grpc:
+  server:
+    port: 50051
+    security:
+      enabled: false
 

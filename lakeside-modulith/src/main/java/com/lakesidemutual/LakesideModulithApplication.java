@@ -5,7 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGenerator;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+    net.devh.boot.grpc.server.autoconfigure.GrpcServerSecurityAutoConfiguration.class
+})
 @ComponentScan(nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class)
 public class LakesideModulithApplication {
 

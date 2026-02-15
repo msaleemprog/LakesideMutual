@@ -38,8 +38,9 @@ import com.lakesidemutual.policymanagement.domain.policy.PolicyAggregateRoot;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyId;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyPeriod;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyType;
+import com.lakesidemutual.policymanagement.domain.policy.UpdatePolicyEvent;
 import com.lakesidemutual.policymanagement.infrastructure.PolicyRepository;
-import com.lakesidemutual.policymanagement.infrastructure.RiskManagementMessageProducer;
+import com.lakesidemutual.policymanagement.infrastructure.RiskManagementEventPublisher;
 import com.lakesidemutual.policymanagement.interfaces.dtos.customer.CustomerDto;
 import com.lakesidemutual.policymanagement.interfaces.dtos.policy.CreatePolicyRequestDto;
 import com.lakesidemutual.policymanagement.interfaces.dtos.policy.PaginatedPolicyResponseDto;
@@ -56,7 +57,7 @@ public class PolicyInformationHolder {
   private PolicyRepository policyRepository;
 
   @Autowired
-  private RiskManagementMessageProducer riskManagementMessageProducer;
+  private RiskManagementEventPublisher riskManagementEventPublisher;
 
   @Operation(summary = "Create a new policy.")
   @PostMapping
@@ -89,6 +90,13 @@ public class PolicyInformationHolder {
     // helpful link
     policyDto.add(linkTo(methodOn(PolicyInformationHolder.class).getPolicy(id, "")).withSelfRel());
     policyDto.add(org.springframework.hateoas.Link.of("/customers/" + policyDto.getCustomerId()).withRel("customer"));
+
+    // Publish UPDATE event for Risk Management projection (CREATE is treated as an upsert)
+    CustomerDto minimalCustomer = new CustomerDto();
+    minimalCustomer.setCustomerId(policyDto.getCustomerId());
+    UpdatePolicyEvent updateEvent = new UpdatePolicyEvent(
+        request.getRemoteAddr(), new Date(), minimalCustomer, policyDto);
+    riskManagementEventPublisher.publish(updateEvent);
 
     return ResponseEntity.ok(policyDto);
   }
@@ -130,6 +138,13 @@ public class PolicyInformationHolder {
     response.add(linkTo(methodOn(PolicyInformationHolder.class).getPolicy(policyId, "")).withSelfRel());
     response.add(org.springframework.hateoas.Link.of("/customers/" + response.getCustomerId()).withRel("customer"));
 
+    // Publish UPDATE event for Risk Management projection
+    CustomerDto minimalCustomer = new CustomerDto();
+    minimalCustomer.setCustomerId(response.getCustomerId());
+    UpdatePolicyEvent updateEvent = new UpdatePolicyEvent(
+        request.getRemoteAddr(), new Date(), minimalCustomer, response);
+    riskManagementEventPublisher.publish(updateEvent);
+
     return ResponseEntity.ok(response);
   }
 
@@ -143,7 +158,7 @@ public class PolicyInformationHolder {
     policyRepository.deleteById(policyId);
 
     final DeletePolicyEvent event = new DeletePolicyEvent(request.getRemoteAddr(), new Date(), policyId.getId());
-    riskManagementMessageProducer.emitEvent(event);
+    riskManagementEventPublisher.publish(event);
 
     return ResponseEntity.noContent().build();
   }

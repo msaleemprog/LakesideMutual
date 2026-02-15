@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.microserviceapipatterns.domaindrivendesign.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.lakesidemutual.policymanagement.domain.customer.CustomerId;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyAggregateRoot;
@@ -20,4 +21,12 @@ public interface PolicyRepository extends JpaRepository<PolicyAggregateRoot, Pol
 	}
 
 	public List<PolicyAggregateRoot> findAllByCustomerIdOrderByCreationDateDesc(CustomerId customerId);
+
+	@Query("""
+    select distinct p
+    from PolicyAggregateRoot p
+    left join fetch p.insuringAgreement ia
+    left join fetch ia.agreementItems
+  """)
+  List<PolicyAggregateRoot> findAllWithAgreementItems();
 }

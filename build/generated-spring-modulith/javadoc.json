@@ -1,1 +1,1 @@
-[{"name":"com.lakesidemutual.customermanagement.domain.interactionlog.InteractionLogAggregateRoot","comment":"InteractionLogAggregateRoot is the root entity of the InteractionLog aggregate. Note that there is no class for the InteractionLog aggregate, so the package can be seen as aggregate."}]
+[]
