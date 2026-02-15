@@ -1,32 +1,54 @@
 services:
+  modulith:
+    build:
+      context: ./lakeside-modulith  # <-- CHANGE this to your modulith project folder
+      dockerfile: Dockerfile
+    image: lakesidemutual/modulith
+    ports:
+      - "8085:8085"
+      - "50051:50051"
+    environment:
+      - SPRING_PROFILES_ACTIVE=customerselfservice-security,customerselfservice-customers,customerselfservice-cities
+    volumes:
+      # Persist H2 file database between restarts (matches jdbc:h2:file:./data/...)
+      - modulith-data:/app/data
+
   policy-management-frontend:
     build: policy-management-frontend
     image: lakesidemutual/policy-management-frontend
     environment:
+      # Browser calls modulith on the host port mapping
       - "VUE_APP_POLICY_MANAGEMENT_BACKEND=http://localhost:8085"
     ports:
       - "3010:80"
+    depends_on:
+      - modulith
 
   customer-management-frontend:
     build: customer-management-frontend
     image: lakesidemutual/customer-management-frontend
-    depends_on:
-      - policy-management-frontend
     environment:
       - "REACT_APP_CUSTOMER_SELF_SERVICE_BACKEND=http://localhost:8085"
       - "REACT_APP_CUSTOMER_MANAGEMENT_BACKEND=http://localhost:8085/customer-management"
       - "REACT_APP_POLICY_MANAGEMENT_FRONTEND=http://localhost:3010"
     ports:
       - "3020:80"
+    depends_on:
+      - modulith
+      - policy-management-frontend
 
   customer-self-service-frontend:
     build: customer-self-service-frontend
     image: lakesidemutual/customer-self-service-frontend
-    depends_on:
-      - policy-management-frontend
     environment:
       - "REACT_APP_CUSTOMER_SELF_SERVICE_BACKEND=http://localhost:8085"
       - "REACT_APP_POLICY_MANAGEMENT_BACKEND=http://localhost:8085"
       - "REACT_APP_CUSTOMER_MANAGEMENT_BACKEND=http://localhost:8085/customer-management"
     ports:
       - "3000:80"
+    depends_on:
+      - modulith
+      - policy-management-frontend
+
+volumes:
+  modulith-data:
