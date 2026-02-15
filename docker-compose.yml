@@ -1,63 +1,32 @@
-version: "3"
 services:
-  spring-boot-admin:
-    build: spring-boot-admin
-    image: lakesidemutual/spring-boot-admin
-    ports:
-      - "9000:9000"
-
-  customer-management-backend:
-    build: customer-management-backend
-    image: lakesidemutual/customer-management-backend
+  policy-management-frontend:
+    build: policy-management-frontend
+    image: lakesidemutual/policy-management-frontend
     environment:
-      # ✅ IMPORTANT: customer-core is now namespaced under /customer-core
-      - "CUSTOMERCORE_BASEURL=http://host.docker.internal:8085/customer-core"
-      - "SPRING_BOOT_ADMIN_CLIENT_URL=http://spring-boot-admin:9000"
+      - "VUE_APP_POLICY_MANAGEMENT_BACKEND=http://localhost:8085"
     ports:
-      - "8100:8100"
+      - "3010:80"
 
   customer-management-frontend:
     build: customer-management-frontend
     image: lakesidemutual/customer-management-frontend
     depends_on:
-      - customer-management-backend
+      - policy-management-frontend
     environment:
-      # Browser hits modulith on your host:
       - "REACT_APP_CUSTOMER_SELF_SERVICE_BACKEND=http://localhost:8085"
       - "REACT_APP_CUSTOMER_MANAGEMENT_BACKEND=http://localhost:8085/customer-management"
       - "REACT_APP_POLICY_MANAGEMENT_FRONTEND=http://localhost:3010"
     ports:
       - "3020:80"
 
-  policy-management-frontend:
-    build: policy-management-frontend
-    image: lakesidemutual/policy-management-frontend
-    environment:
-      # Browser hits modulith on your host:
-      - "VUE_APP_POLICY_MANAGEMENT_BACKEND=http://localhost:8085"
-    ports:
-      - "3010:80"
-
   customer-self-service-frontend:
     build: customer-self-service-frontend
     image: lakesidemutual/customer-self-service-frontend
     depends_on:
-      - customer-management-backend
       - policy-management-frontend
     environment:
-      # Browser hits modulith on your host:
       - "REACT_APP_CUSTOMER_SELF_SERVICE_BACKEND=http://localhost:8085"
       - "REACT_APP_POLICY_MANAGEMENT_BACKEND=http://localhost:8085"
       - "REACT_APP_CUSTOMER_MANAGEMENT_BACKEND=http://localhost:8085/customer-management"
     ports:
       - "3000:80"
-
-  risk-management-server:
-    build: risk-management-server
-    image: lakesidemutual/risk-management-server
-    environment:
-      # If your modulith exposes the broker ports on the HOST:
-      - "ACTIVEMQ_HOST=host.docker.internal"
-      - "ACTIVEMQ_PORT=61613"
-    ports:
-      - "50051:50051"
