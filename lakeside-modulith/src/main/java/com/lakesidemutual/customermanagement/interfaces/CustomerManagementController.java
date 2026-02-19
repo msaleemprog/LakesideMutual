@@ -4,7 +4,8 @@ import com.lakesidemutual.customermanagement.infrastructure.CustomerCoreRemotePr
 import com.lakesidemutual.customermanagement.interfaces.dtos.CustomerDto;
 import com.lakesidemutual.customermanagement.interfaces.dtos.PaginatedCustomerResponseDto;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.hateoas.Link;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
@@ -60,8 +61,19 @@ class CustomerManagementController {
 
     @GetMapping("/{customerId}")
     CustomerDto getCustomer(@PathVariable String customerId) {
-        return customerCore.getCustomer(
-                new com.lakesidemutual.customermanagement.domain.customer.CustomerId(customerId)
+
+        CustomerDto dto = customerCore.getCustomer(
+            new com.lakesidemutual.customermanagement.domain.customer.CustomerId(customerId)
         );
+
+        // Build a URL based on THIS request: /customers/{id}  -> /customers/{id}/address
+        String changeAddressHref = ServletUriComponentsBuilder
+            .fromCurrentRequestUri()
+            .path("/address")
+            .toUriString();
+
+        dto.add(Link.of(changeAddressHref).withRel("address.change"));
+
+        return dto;
     }
 }

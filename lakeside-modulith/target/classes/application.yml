@@ -58,6 +58,9 @@ logging:
   level:
     org.springframework.security: DEBUG
     org.springframework.security.web.FilterChainProxy: DEBUG
+    org.springframework.messaging.simp.annotation.support.SimpAnnotationMethodMessageHandler: DEBUG
+    org.springframework.messaging: INFO
+    org.springframework.web.socket: INFO
 
 grpc:
   server:
