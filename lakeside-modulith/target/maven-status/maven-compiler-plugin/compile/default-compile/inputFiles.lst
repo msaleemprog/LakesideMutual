@@ -82,6 +82,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\InteractionLogInformationHolder.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\NotificationInformationHolder.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\package-info.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\interfaces\WebSocketConfig.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customermanagement\package-info.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\api\Address.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\api\CustomerInfo.java
@@ -119,6 +120,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\infrastructure\PolicyManagementMessageProducer.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\infrastructure\UserLoginRepository.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\AuthenticationController.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\ChatController.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\CityReferenceDataHolder.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\configuration\AuthenticationTokenFilter.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\customerselfservice\interfaces\configuration\CustomerSelfServiceMigrationSecurityConfig.java
@@ -177,9 +179,13 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\api\Money.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\api\package-info.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\api\PolicyCreated.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\api\PolicyRiskProjectionDeleted.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\api\PolicyRiskProjectionQuery.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\api\PolicyRiskProjectionUpdated.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\application\DataLoader.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\application\ExpirationCheckerJob.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\application\ExpirationCheckerJobConfiguration.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\application\PolicyRiskProjectionQueryService.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\domain\customer\CustomerId.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\domain\insurancequoterequest\Address.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\domain\insurancequoterequest\CustomerDecisionEvent.java
@@ -240,6 +246,7 @@ C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemut
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\dtos\policy\InsuringAgreementDto.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\dtos\policy\InsuringAgreementItemDto.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\dtos\policy\MoneyAmountDto.java
+C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\dtos\policy\package-info.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\dtos\policy\PaginatedPolicyResponseDto.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\dtos\policy\PolicyDto.java
 C:\LakeSideMutual\LakesideMutual\lakeside-modulith\src\main\java\com\lakesidemutual\policymanagement\interfaces\dtos\policy\PolicyNotFoundException.java

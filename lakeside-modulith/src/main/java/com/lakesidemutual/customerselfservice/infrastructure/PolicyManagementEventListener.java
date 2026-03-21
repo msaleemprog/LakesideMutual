@@ -35,9 +35,9 @@ public class PolicyManagementEventListener {
                     Currency.getInstance(event.policyLimit().currencyCode()));
 
             InsuranceQuoteEntity quote = new InsuranceQuoteEntity(event.expirationDate(), premium, limit);
-            req.acceptRequest(quote, when); // REQUEST_SUBMITTED -> QUOTE_RECEIVED ✅
+            req.acceptRequest(quote, when); // REQUEST_SUBMITTED -> QUOTE_RECEIVED 
         } else {
-            req.rejectRequest(when);        // REQUEST_SUBMITTED -> REQUEST_REJECTED ✅
+            req.rejectRequest(when);        // REQUEST_SUBMITTED -> REQUEST_REJECTED 
         }
 
         repo.save(req);
@@ -48,7 +48,7 @@ public class PolicyManagementEventListener {
         InsuranceQuoteRequestAggregateRoot req = repo.findById(event.requestId())
                 .orElseThrow(() -> new IllegalStateException("Unknown quote request " + event.requestId()));
 
-        req.finalizeQuote(event.policyId(), event.createdAt()); // -> POLICY_CREATED ✅
+        req.finalizeQuote(event.policyId(), event.createdAt()); // -> POLICY_CREATED 
         repo.save(req);
     }
 }

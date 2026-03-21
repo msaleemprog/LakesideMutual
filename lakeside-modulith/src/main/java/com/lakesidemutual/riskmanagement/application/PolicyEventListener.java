@@ -3,9 +3,8 @@ package com.lakesidemutual.riskmanagement.application;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import com.lakesidemutual.policymanagement.domain.policy.DeletePolicyEvent;
-import com.lakesidemutual.policymanagement.domain.policy.UpdatePolicyEvent;
-
+import com.lakesidemutual.policymanagement.api.PolicyRiskProjectionDeleted;
+import com.lakesidemutual.policymanagement.api.PolicyRiskProjectionUpdated;
 @Component
 public class PolicyEventListener {
 
@@ -16,12 +15,12 @@ public class PolicyEventListener {
   }
 
   @EventListener
-  public void on(UpdatePolicyEvent event) {
-    store.upsert(event.getCustomer(), event.getPolicy());
+  public void on(PolicyRiskProjectionUpdated event) {
+    store.upsert(event.getPolicy());
   }
 
   @EventListener
-  public void on(DeletePolicyEvent event) {
+  public void on(PolicyRiskProjectionDeleted event) {
     store.deletePolicy(event.getPolicyId());
   }
 }

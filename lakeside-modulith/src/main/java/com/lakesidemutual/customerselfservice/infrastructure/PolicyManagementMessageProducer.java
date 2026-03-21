@@ -70,7 +70,7 @@ private final ApplicationEventPublisher eventPublisher;
 
     private void emitCustomerDecisionEvent(CustomerDecisionEvent event) {
 
-    // ✅ Always publish in-process for modulith so PM can update immediately
+    // Always publish in-process for modulith so PM can update immediately
     // This matches Option A and works even if JMS is down/misconfigured.
     eventPublisher.publishEvent(new CustomerDecisionSubmitted(
     event.getInsuranceQuoteRequestId(),

@@ -29,24 +29,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.lakesidemutual.policymanagement.api.PolicyRiskProjectionDeleted;
+import com.lakesidemutual.policymanagement.api.PolicyRiskProjectionUpdated;
 import com.lakesidemutual.policymanagement.domain.customer.CustomerId;
-import com.lakesidemutual.policymanagement.domain.policy.DeletePolicyEvent;
 import com.lakesidemutual.policymanagement.domain.policy.InsuringAgreementEntity;
 import com.lakesidemutual.policymanagement.domain.policy.MoneyAmount;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyAggregateRoot;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyId;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyPeriod;
 import com.lakesidemutual.policymanagement.domain.policy.PolicyType;
-import com.lakesidemutual.policymanagement.domain.policy.UpdatePolicyEvent;
 import com.lakesidemutual.policymanagement.infrastructure.PolicyRepository;
 import com.lakesidemutual.policymanagement.infrastructure.RiskManagementEventPublisher;
-import com.lakesidemutual.policymanagement.interfaces.dtos.customer.CustomerDto;
 import com.lakesidemutual.policymanagement.interfaces.dtos.policy.CreatePolicyRequestDto;
 import com.lakesidemutual.policymanagement.interfaces.dtos.policy.PaginatedPolicyResponseDto;
 import com.lakesidemutual.policymanagement.interfaces.dtos.policy.PolicyDto;
 import com.lakesidemutual.policymanagement.interfaces.dtos.policy.PolicyNotFoundException;
-
+import com.lakesidemutual.policymanagement.interfaces.dtos.customer.CustomerDto;
 @RestController
 @RequestMapping("/policies")
 public class PolicyInformationHolder {
@@ -92,12 +90,7 @@ public class PolicyInformationHolder {
     policyDto.add(org.springframework.hateoas.Link.of("/customers/" + policyDto.getCustomerId()).withRel("customer"));
 
     // Publish UPDATE event for Risk Management projection (CREATE is treated as an upsert)
-    CustomerDto minimalCustomer = new CustomerDto();
-    minimalCustomer.setCustomerId(policyDto.getCustomerId());
-    UpdatePolicyEvent updateEvent = new UpdatePolicyEvent(
-        request.getRemoteAddr(), new Date(), minimalCustomer, policyDto);
-    riskManagementEventPublisher.publish(updateEvent);
-
+    riskManagementEventPublisher.publish(new PolicyRiskProjectionUpdated(policyDto));
     return ResponseEntity.ok(policyDto);
   }
 
@@ -139,11 +132,7 @@ public class PolicyInformationHolder {
     response.add(org.springframework.hateoas.Link.of("/customers/" + response.getCustomerId()).withRel("customer"));
 
     // Publish UPDATE event for Risk Management projection
-    CustomerDto minimalCustomer = new CustomerDto();
-    minimalCustomer.setCustomerId(response.getCustomerId());
-    UpdatePolicyEvent updateEvent = new UpdatePolicyEvent(
-        request.getRemoteAddr(), new Date(), minimalCustomer, response);
-    riskManagementEventPublisher.publish(updateEvent);
+    riskManagementEventPublisher.publish(new PolicyRiskProjectionUpdated(response));
 
     return ResponseEntity.ok(response);
   }
@@ -157,8 +146,7 @@ public class PolicyInformationHolder {
     logger.info("Deleting policy with id '{}'", policyId.getId());
     policyRepository.deleteById(policyId);
 
-    final DeletePolicyEvent event = new DeletePolicyEvent(request.getRemoteAddr(), new Date(), policyId.getId());
-    riskManagementEventPublisher.publish(event);
+    riskManagementEventPublisher.publish(new PolicyRiskProjectionDeleted(policyId.getId()));
 
     return ResponseEntity.noContent().build();
   }
