@@ -21,7 +21,7 @@ function printReport(report, outputPath) {
 program.command('run [output-path]').action((outputPath) => {
   const PROTO_PATH = path.join(
     __dirname,
-    '../risk-management-server/riskmanagement.proto'
+    '../lakeside-modulith/src/main/proto/riskmanagement.proto'
   )
 
   const packageDefinition = protoLoader.loadSync(PROTO_PATH)
