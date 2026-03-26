@@ -42,3 +42,15 @@ From the root folder of the project, run:
 ```bash
 docker compose build
 docker compose up
+
+## 📊 Running the Risk Management Client 
+Navigate to the client directory: 
+Run: 
+```bash
+npm install  
+.\riskmanager.bat run C:\Users\MariaS\Desktop\report.csv 
+
+This client: 
+- Processes policy-related data 
+- Generates a risk analysis report 
+- Writes results to the specified CSV file
