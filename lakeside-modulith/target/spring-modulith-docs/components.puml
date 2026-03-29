@@ -1,0 +1,29 @@
+@startuml
+set separator none
+title LakesideModulithApplication
+
+top to bottom direction
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Component>
+
+Container_Boundary("LakesideModulithApplication.LakesideModulithApplication_boundary", "LakesideModulithApplication", $tags="") {
+  Component(LakesideModulithApplication.LakesideModulithApplication.Customercore, "Customercore", $techn="Module", $descr="", $tags="", $link="")
+  Component(LakesideModulithApplication.LakesideModulithApplication.Customermanagement, "Customermanagement", $techn="Module", $descr="", $tags="", $link="")
+  Component(LakesideModulithApplication.LakesideModulithApplication.CustomerSelfService, "Customer Self Service", $techn="Module", $descr="", $tags="", $link="")
+  Component(LakesideModulithApplication.LakesideModulithApplication.IntegrationEvents, "Integration Events", $techn="Module", $descr="", $tags="", $link="")
+  Component(LakesideModulithApplication.LakesideModulithApplication.PolicyManagement, "Policy Management", $techn="Module", $descr="", $tags="", $link="")
+  Component(LakesideModulithApplication.LakesideModulithApplication.RiskManagement, "Risk Management", $techn="Module", $descr="", $tags="", $link="")
+}
+
+Rel(LakesideModulithApplication.LakesideModulithApplication.RiskManagement, LakesideModulithApplication.LakesideModulithApplication.PolicyManagement, "uses", $techn="", $tags="", $link="")
+Rel(LakesideModulithApplication.LakesideModulithApplication.CustomerSelfService, LakesideModulithApplication.LakesideModulithApplication.IntegrationEvents, "listens to", $techn="", $tags="", $link="")
+Rel(LakesideModulithApplication.LakesideModulithApplication.CustomerSelfService, LakesideModulithApplication.LakesideModulithApplication.Customercore, "uses", $techn="", $tags="", $link="")
+Rel(LakesideModulithApplication.LakesideModulithApplication.PolicyManagement, LakesideModulithApplication.LakesideModulithApplication.IntegrationEvents, "listens to", $techn="", $tags="", $link="")
+Rel(LakesideModulithApplication.LakesideModulithApplication.PolicyManagement, LakesideModulithApplication.LakesideModulithApplication.Customercore, "uses", $techn="", $tags="", $link="")
+Rel(LakesideModulithApplication.LakesideModulithApplication.Customermanagement, LakesideModulithApplication.LakesideModulithApplication.Customercore, "uses", $techn="", $tags="", $link="")
+Rel(LakesideModulithApplication.LakesideModulithApplication.RiskManagement, LakesideModulithApplication.LakesideModulithApplication.PolicyManagement, "listens to", $techn="", $tags="", $link="")
+
+SHOW_LEGEND(true)
+@enduml

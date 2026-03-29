@@ -4,6 +4,6 @@ import org.springframework.modulith.ApplicationModule;
 
 @ApplicationModule(
         displayName = "Policy Management",
-        allowedDependencies = { "customercore::api" }
+        allowedDependencies = { "customercore::api", "integrationevents::api" }
 )
 public class PolicyManagementModule { }

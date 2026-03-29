@@ -1,0 +1,20 @@
+@startuml
+set separator none
+title Risk Management
+
+top to bottom direction
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Component>
+
+Container_Boundary("LakesideModulithApplication.LakesideModulithApplication_boundary", "LakesideModulithApplication", $tags="") {
+  Component(LakesideModulithApplication.LakesideModulithApplication.PolicyManagement, "Policy Management", $techn="Module", $descr="", $tags="", $link="")
+  Component(LakesideModulithApplication.LakesideModulithApplication.RiskManagement, "Risk Management", $techn="Module", $descr="", $tags="", $link="")
+}
+
+Rel(LakesideModulithApplication.LakesideModulithApplication.RiskManagement, LakesideModulithApplication.LakesideModulithApplication.PolicyManagement, "uses", $techn="", $tags="", $link="")
+Rel(LakesideModulithApplication.LakesideModulithApplication.RiskManagement, LakesideModulithApplication.LakesideModulithApplication.PolicyManagement, "listens to", $techn="", $tags="", $link="")
+
+SHOW_LEGEND(true)
+@enduml

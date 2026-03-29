@@ -1,0 +1,24 @@
+[%autowidth.stretch, cols="h,a"]
+|===
+|Base package
+|`com.lakesidemutual.customermanagement`
+|Spring components
+|_Controllers_
+
+* `c.l.c.interfaces.CustomerInformationHolder` -- This REST controller gives clients access to the customer data. It is an example of the <i>Information Holder Resource</i> pattern. This particular one is a special type of information holder called <i>Master Data Holder</i>.
+* `c.l.c.interfaces.CustomerMessageController` -- This class is a Controller that processes WebSocket chat messages and broadcasts them to all subscribers.
+* `c.l.c.interfaces.ErrorController` -- This class implements a custom error controller that returns an <a href= "https://www.microservice-api-patterns.org/patterns/quality/qualityManagementAndGovernance/ErrorReport">Error Report</a>.
+* `c.l.c.interfaces.InteractionLogInformationHolder` -- This REST controller gives clients access to a customer's interaction log. It is an example of the <i>Information Holder Resource</i> pattern. This particular one is a special type of information holder called <i>Master Data Holder</i>.
+* `c.l.c.interfaces.NotificationInformationHolder` -- This REST controller gives clients access the current list of unacknowledged chat notifications. It is an example of the <i>Information Holder Resource</i> pattern. This particular one is a special type of information holder called <i>Master Data Holder</i>.
+
+_Repositories_
+
+* `c.l.c.infrastructure.InteractionLogRepository` -- The InteractionLogRepository can be used to read and write InteractionLogAggregateRoot objects from and to the backing database. Spring automatically searches for interfaces that extend the JpaRepository interface and creates a corresponding Spring bean for each of them. For more information on repositories visit the <a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/">Spring Data JPA - Reference Documentation</a>.
+
+_Others_
+
+* `c.l.c.infrastructure.CustomerCoreRemoteProxy`
+* `c.l.c.interfaces.WebSocketConfig`
+|Bean references
+|* `c.l.c.api.CustomerCoreApi` (in Customercore)
+|===

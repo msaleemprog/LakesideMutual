@@ -1,0 +1,14 @@
+[%autowidth.stretch, cols="h,a"]
+|===
+|Base package
+|`com.lakesidemutual.policymanagement`
+|Spring components
+|_Services_
+
+* `c.l.p.api.PolicyRiskProjectionQuery` (via `c.l.p.application.PolicyRiskProjectionQueryService`)
+|Bean references
+|* `c.l.c.api.CustomerCoreApi` (in Customercore)
+|Events listened to
+|* `c.l.i.api.InsuranceQuoteRequestSubmitted` 
+* `c.l.i.api.CustomerDecisionSubmitted` 
+|===

@@ -1,0 +1,10 @@
+[%autowidth.stretch, cols="h,a"]
+|===
+|Base package
+|`com.lakesidemutual.customerselfservice`
+|Bean references
+|* `c.l.c.api.CustomerCoreApi` (in Customercore)
+|Events listened to
+|* `c.l.i.api.PolicyCreated` 
+* `c.l.i.api.InsuranceQuoteResponded` 
+|===

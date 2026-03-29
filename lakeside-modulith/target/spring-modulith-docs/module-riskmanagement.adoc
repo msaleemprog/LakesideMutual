@@ -1,0 +1,10 @@
+[%autowidth.stretch, cols="h,a"]
+|===
+|Base package
+|`com.lakesidemutual.riskmanagement`
+|Bean references
+|* `c.l.p.api.PolicyRiskProjectionQuery` (in Policy Management)
+|Events listened to
+|* `c.l.p.api.PolicyRiskProjectionUpdated` 
+* `c.l.p.api.PolicyRiskProjectionDeleted` 
+|===

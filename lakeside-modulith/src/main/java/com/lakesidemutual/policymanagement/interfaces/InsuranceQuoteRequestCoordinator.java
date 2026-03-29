@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.lakesidemutual.policymanagement.api.InsuranceQuoteResponded;
-import com.lakesidemutual.policymanagement.api.Money;
+import com.lakesidemutual.integrationevents.api.InsuranceQuoteResponded;
+import com.lakesidemutual.integrationevents.api.Money;
 import com.lakesidemutual.policymanagement.domain.insurancequoterequest.InsuranceQuoteEntity;
 import com.lakesidemutual.policymanagement.domain.insurancequoterequest.InsuranceQuoteRequestAggregateRoot;
 import com.lakesidemutual.policymanagement.domain.insurancequoterequest.RequestStatus;

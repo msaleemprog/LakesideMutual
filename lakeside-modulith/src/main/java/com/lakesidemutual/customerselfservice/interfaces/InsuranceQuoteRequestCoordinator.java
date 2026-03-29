@@ -39,12 +39,12 @@ import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequ
 import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequest.InsuranceQuoteResponseDto;
 import org.springframework.context.ApplicationEventPublisher;
 
-import com.lakesidemutual.policymanagement.api.CustomerDecisionSubmitted;
-import com.lakesidemutual.policymanagement.api.InsuranceQuoteRequestSubmitted;
-import com.lakesidemutual.policymanagement.api.CustomerInfo;
-import com.lakesidemutual.policymanagement.api.Address;
-import com.lakesidemutual.policymanagement.api.InsuranceOptions;
-import com.lakesidemutual.policymanagement.api.Money;
+import com.lakesidemutual.integrationevents.api.CustomerDecisionSubmitted;
+import com.lakesidemutual.integrationevents.api.InsuranceQuoteRequestSubmitted;
+import com.lakesidemutual.integrationevents.api.CustomerInfo;
+import com.lakesidemutual.integrationevents.api.Address;
+import com.lakesidemutual.integrationevents.api.InsuranceOptions;
+import com.lakesidemutual.integrationevents.api.Money;
 
 /**
  * This REST controller gives clients access to the insurance quote requests. It is an example of the

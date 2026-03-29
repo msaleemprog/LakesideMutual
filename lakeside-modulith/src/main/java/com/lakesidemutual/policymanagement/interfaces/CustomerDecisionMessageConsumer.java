@@ -22,8 +22,7 @@ import com.lakesidemutual.policymanagement.domain.policy.PolicyType;
 import com.lakesidemutual.policymanagement.infrastructure.PolicyInsuranceQuoteRequestRepository;
 import com.lakesidemutual.policymanagement.infrastructure.PolicyRepository;
 import org.springframework.context.ApplicationEventPublisher;
-import com.lakesidemutual.policymanagement.api.PolicyCreated;
-
+import com.lakesidemutual.integrationevents.api.PolicyCreated;
 
 /**
  * Transport-agnostic handler. Called by the Modulith event listener.

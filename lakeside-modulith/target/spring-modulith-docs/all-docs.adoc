@@ -1,0 +1,27 @@
+== LakesideModulithApplication
+plantuml::components.puml[,,format=svg]
+
+== Customercore
+plantuml::module-customercore.puml[,,format=svg]
+include::module-customercore.adoc[]
+
+== Customermanagement
+plantuml::module-customermanagement.puml[,,format=svg]
+include::module-customermanagement.adoc[]
+
+== Customer Self Service
+plantuml::module-customerselfservice.puml[,,format=svg]
+include::module-customerselfservice.adoc[]
+
+== Integration Events
+plantuml::module-integrationevents.puml[,,format=svg]
+include::module-integrationevents.adoc[]
+
+== Policy Management
+plantuml::module-policymanagement.puml[,,format=svg]
+include::module-policymanagement.adoc[]
+
+== Risk Management
+plantuml::module-riskmanagement.puml[,,format=svg]
+include::module-riskmanagement.adoc[]
+

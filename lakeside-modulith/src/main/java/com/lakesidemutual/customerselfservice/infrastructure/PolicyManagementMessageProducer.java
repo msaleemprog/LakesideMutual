@@ -11,8 +11,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.ApplicationEventPublisher;
-import com.lakesidemutual.policymanagement.api.CustomerDecisionSubmitted;
-
+import com.lakesidemutual.integrationevents.api.CustomerDecisionSubmitted;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.CustomerDecisionEvent;
 import com.lakesidemutual.customerselfservice.domain.insurancequoterequest.InsuranceQuoteRequestEvent;
 import com.lakesidemutual.customerselfservice.interfaces.dtos.insurancequoterequest.InsuranceQuoteRequestDto;
@@ -69,15 +68,6 @@ private final ApplicationEventPublisher eventPublisher;
     }
 
     private void emitCustomerDecisionEvent(CustomerDecisionEvent event) {
-
-    // Always publish in-process for modulith so PM can update immediately
-    // This matches Option A and works even if JMS is down/misconfigured.
-    eventPublisher.publishEvent(new CustomerDecisionSubmitted(
-    event.getInsuranceQuoteRequestId(),
-    event.getDate(),
-    event.isQuoteAccepted()
-));
-
 
     // Keep JMS as best-effort (aligned with upstream), but never block REST
     if (jmsTemplate.isEmpty()) {

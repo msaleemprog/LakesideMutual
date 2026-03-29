@@ -1,0 +1,15 @@
+[%autowidth.stretch, cols="h,a"]
+|===
+|Base package
+|`com.lakesidemutual.customercore`
+|Spring components
+|_Services_
+
+* `c.l.c.api.CustomerCoreApi` (via `c.l.c.api.CustomerCoreApiImpl`)
+
+_Others_
+
+* `c.l.c.domain.customer.CustomerFactory` -- CustomerFactory is a factory that is responsible for the creation of CustomerAggregateRoot objects. It makes sure that each new customer has a unique CustomerId and that phone numbers are formatted correctly.
+|Aggregate roots
+|* `c.l.c.domain.customer.CustomerAggregateRoot` -- CustomerAggregateRoot is the root entity of the Customer aggregate. Note that there is no class for the Customer aggregate, so the package can be seen as aggregate.
+|===
